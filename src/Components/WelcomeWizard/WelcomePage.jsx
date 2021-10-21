@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from '@material-ui/core';
 import { Container } from '@material-ui/core';
@@ -85,7 +85,7 @@ export default function WelcomePage() {
                     startAdornment={<InputAdornment position="right"></InputAdornment>}
                 />
             </FormControl>
-            <div className={values.amount == 0 ? classes.error : ""}>{values.amount == 0 ? "The amount must be higher than zero" : ""}</div>
+            <div className={values.amount === 0 ? classes.error : ""}>{values.amount === 0 ? "The amount must be higher than zero" : ""}</div>
             <Button disabled={!values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" className={classes.button}>
                 add
             </Button>

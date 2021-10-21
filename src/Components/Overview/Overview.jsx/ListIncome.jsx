@@ -1,8 +1,7 @@
-import { Box, Icon, LinearProgress, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import React, { useContext, useEffect, useState } from 'react'
+import { Icon, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import React, { useContext } from 'react'
 import { Context } from '../../../Provider'
 import { makeStyles } from '@material-ui/styles';
-import parseISOWithOptions from 'date-fns/esm/fp/parseISOWithOptions/index.js';
 import ProgressBar from './ProgressBar';
 
 
@@ -10,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
 
     incomeStyle: {
         color: "#03dac5"
+    },
+    expenseStyle: {
+        color: "red",
     },
     text: {
         textTransform: "capitalize",
@@ -27,37 +29,37 @@ export default function ListIncome() {
 
 
     const sumIncome = [];
-    entries.reduce(function (res, value, index) {
-        const newBudget = checked[index].budget
+    entries.reduce(function (res, value) {
+        const newBudget = checked.find(x => x.category === value.category).budget
         if (!res[value.category]) {
+
             res[value.category] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-            sumIncome.push(res[value.category]) 
+
+            sumIncome.push(res[value.category])
+
         }
         res[value.category].amount += parseInt(value.amount);
         return res;
     }, {});
-    // const res = sumIncome.map((el, index) => el.category === checked[index].category && parseInt(checked[index].budget))
     console.log(sumIncome)
-    // console.log(res)
 
     return (
         <div>
             {sumIncome.map((item) => {
-        
-              
+
+                if (item.type === "income") {
 
                     return (
 
                         <>
-                            <ListItem className={classes.incomeStyle, classes.text}>
+                            <ListItem className={classes.incomeStyle} className={classes.text}>
                                 <ListItemIcon>
                                     <Icon>{item.icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText />{item.type} {item.category}
-                                <ListItemText />{item.selectedDate}
-                                <ListItemText style={{ textAlign: "right" }} className={item.type === "income" ? classes.incomeStyle : classes.expenseStyle} /> {item.amount} / {item.budget}
+                                <ListItemText primary={`${item.type} ${item.category}`} />
+                                <ListItemText style={{ textAlign: "right" }} className={classes.incomeStyle} primary={`${item.amount} ${!item.budget ? "" : "/"} ${!item.budget ? "" : item.budget}`} /> 
                             </ListItem>
-                            <div style={{marginLeft: '10px', marginRight: '10px'}}>
+                            <div style={{ marginLeft: '50px', marginRight: '10px' }}>
                                 <ProgressBar value={item.amount} max={item.budget} />
                             </div>
 
@@ -65,8 +67,8 @@ export default function ListIncome() {
 
 
                     )
-                
 
+                }
             })}
 
         </div>

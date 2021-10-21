@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from '@material-ui/core';
 import { Container } from '@material-ui/core';
@@ -6,11 +6,9 @@ import LogoText from '../Logo/LogoText';
 import { FormControl } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
 
 import List from '@material-ui/core/List';
 
-import { Context } from '../../Provider';
 import RenderingCheckboxes from './RenderingCheckboxes';
 
 const useStyles = makeStyles((theme) => ({

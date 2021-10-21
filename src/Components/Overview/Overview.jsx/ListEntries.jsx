@@ -42,7 +42,6 @@ export default function ListEntries() {
     const handleClose = () => {
         setOpen(false)
     }
-    const [show, setShow] = useState(false);
 
     return (
         <div>
@@ -50,8 +49,7 @@ export default function ListEntries() {
 
                 {entries.map((item) => {
 
-                    const { type, amount, category, selectedDate, icon } = item
-
+                    const { type, amount, category, icon, selectedDate } = item
                     return (
 
                         <>
@@ -63,10 +61,9 @@ export default function ListEntries() {
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText />{type} {category}
-                                <ListItemText />{selectedDate}
+                                <ListItemText primary={`${type} ${category}`}  secondary={selectedDate} />
 
-                                <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={amount} />
+                                <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? +amount : -amount} />
                             </ListItem>
                             <Divider classes={{ root: classes.marginDivider }} />
                         </>
@@ -85,7 +82,7 @@ export default function ListEntries() {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
 
-                <AddEntries category={item} />
+                <AddEntries handleClose={handleClose} entry={item} />
 
             </Dialog>
         </div>

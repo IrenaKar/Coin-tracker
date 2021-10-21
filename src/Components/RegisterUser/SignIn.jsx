@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,7 +6,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Logo from "../Logo/LogoText";
-import { Button, OutlinedInput, TextField, Typography } from "@material-ui/core";
+import { Button, OutlinedInput, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { InputLabel } from "@material-ui/core";

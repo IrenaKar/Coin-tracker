@@ -12,7 +12,7 @@ export const initialEntries = [
         category: "",
         amount: 500,
         icon: "heart",
-        id: 1,
+        id: 2,
         date: new Date(),
     }
 

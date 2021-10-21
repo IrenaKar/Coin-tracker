@@ -58,12 +58,7 @@ const useStyles = makeStyles((theme) => ({
     margin: {
         marginTop: "20px"
     },
-    incomeStyle: {
-        color: "#03dac5"
-    },
-    expenseStyle: {
-        color: "red"
-    },
+   
 }));
 
 const styleDiv1 = {
@@ -105,7 +100,7 @@ const styleDiv2 = {
 
 export default function Categories() {
     const classes = useStyles();
-    const { categories, checked, img } = useContext(Context)
+    const { checked, img } = useContext(Context)
     const [open, setOpen] = useState(false)
     const [item, setItem] = useState(null)
 
@@ -158,7 +153,7 @@ export default function Categories() {
                         const { id, icon, category, type, budget } = item
 
                         const hasBudget = budget !== 0
-console.log(checked)
+                        // console.log(checked)
                         return <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} button onClick={() => {
                             handleClick(item)
                         }}>

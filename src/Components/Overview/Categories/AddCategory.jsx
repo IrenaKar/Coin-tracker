@@ -4,7 +4,7 @@ import {
     FormControlLabel, InputLabel, makeStyles, MenuItem,
     Select, TextField
 } from '@material-ui/core'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { categoryIcons } from '../../Data/CategoryIcons'
 import Icon from '@material-ui/core/Icon';
 import { Context } from '../../../Provider';
@@ -35,7 +35,8 @@ export default function AddEditCategory({ handleClose, category }) {
 
 
     const allUniqueIcons = [...new Set(categoryIcons.concat(categories.map(c => c.icon)))]
-    
+
+
     return (
         <>
             <DialogTitle>{`${isEditing ? 'Edit' : 'Add'} Category`}</DialogTitle>

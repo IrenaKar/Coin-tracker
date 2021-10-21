@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { TextareaAutosize } from '@material-ui/core';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { categoryIcons } from '../../Data/CategoryIcons';
-
+import DateFnsUtils from '@date-io/date-fns';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -62,12 +62,20 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function AddEntries() {
-
+export default function AddEntries(entry) {
     const classes = useStyles();
 
+    const [item, setItem] = useState(entry || {
+        type: '',
+ 
+        category: '',
+        amount: 0,
+        icon: categoryIcons[0],
+        id: new Date().valueOf(),
+    })
+
+
     const [open, setOpen] = React.useState(false);
-    const [entry, setEntry] = useState([])
 
     const handleOpen = () => {
         setOpen(true);
@@ -76,11 +84,10 @@ export default function AddEntries() {
     const handleClose = () => {
         setOpen(false);
     };
-    const [selectedDate, handleDateChange] = useState(new Date());
 
-    const [item, setItem] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(null);
 
-    const { categories, checked, addEntry, updateEntry, entries } = useContext(Context)
+    const { checked, addEntry, updateEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
     const isEditingEntry = !!entry?.id
@@ -89,30 +96,29 @@ export default function AddEntries() {
 
     return (
 
+            <div>
+                <Tooltip
+                    onClick={() => setShow((prev) => !prev)}
+                    title="Add"
+                    aria-label="add"
+                >
+                    <Fab classes={{ root: classes.btnColor }} aria-label="add" className={classes.buttonMargin}>
 
-        <div>
-            <Tooltip
-                onClick={() => setShow((prev) => !prev)}
-                title="Add"
-                aria-label="add"
-            >
-                <Fab classes={{ root: classes.btnColor }} aria-label="add" className={classes.buttonMargin}>
+                        <AddIcon />
 
-                    <AddIcon />
+                    </Fab>
 
-                </Fab>
+                </Tooltip>
+                <div className={classes.position}>
+                    {show && (
+                        <Button
+                            className={classes.btnSmall} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
+                        >
+                            add entry
+                        </Button>
+                    )}
 
-            </Tooltip>
-            <div className={classes.position}>
-                {show && (
-                    <Button
-                        className={classes.btnSmall} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
-                    >
-                        add entry
-                    </Button>
-                )}
-
-                {/* {show && (
+                    {/* {show && (
                     <Button
                         className={classes.btnSmall} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
                     >
@@ -120,130 +126,128 @@ export default function AddEntries() {
                     </Button>
 
                 )} */}
+                </div>
+                <div>
+                    <Dialog
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            isEditingEntry ? updateEntry(item) : addEntry(item)
+                            handleClose()
+
+                        }}>
+                            <DialogTitle className={classes.formControl}>{`${isEditingEntry ? 'Edit' : 'Add'} Entry`}</DialogTitle>
+                            <DialogContent>
+
+
+                                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                    <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="type"
+                                        value={item.type || ''}
+                                        label="type-label"
+                                        onChange={(e) => {
+                                            setItem({ ...item, type: e.target.value })
+                                        }}
+                                    >
+                                        <MenuItem value={"income"}>Income</MenuItem>
+                                        <MenuItem value={"expence"}>Expence</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl variant="outlined" fullWidth className={classes.formControl}>
+
+                                    <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                    <Select
+                                        autocomplete
+                                        labelId="demo-simple-select-label"
+                                        id="category"
+                                        value={item.category || ''}
+                                        label="category-label"
+                                        onChange={(e) => {
+                                            setItem({ ...item, category: e.target.value })
+                                        }}
+                                    >
+
+                                        {checked.map((element) => {
+                                            return (
+                                                <MenuItem value={element.category}>{element.category}</MenuItem>
+                                            )
+                                        })}
+                                    </Select>
+                                </FormControl>
+                                <FormControl className={classes.formControl} variant="outlined" fullWidth>
+                                    <TextField
+                                        type="number"
+                                        label="Amount"
+                                        variant="outlined"
+                                        value={item.amount || ''}
+                                        onChange={(e) => {
+                                            setItem({ ...item, amount: e.target.value })
+                                        }} />
+                                </FormControl>
+                                <FormControl variant="outlined" fullWidth className={classes.formControl}>
+
+                                    <InputLabel id="demo-simple-select-label">Icon</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="icon"
+                                        value={item.icon || ''}
+                                        label="icon-label"
+                                        onChange={(e) => {
+                                            setItem({ ...item, icon: e.target.value })
+                                        }}
+                                    >
+                                        {icons.map((icon) => {
+                                            return (
+                                                <MenuItem value={icon}><Icon>{icon}</Icon></MenuItem>
+                                            )
+                                        })}
+                                    </Select>
+                                </FormControl>
+                                <FormControl className={classes.formControl}>
+
+                                    <KeyboardDatePicker
+                                        clearable
+                                        label="Start Date"
+                                        id="startDate"
+                                        selected={selectedDate}
+                                        onChange={(date) => {
+                                            setSelectedDate(date);
+                                        }}
+                                        format={"yyyy/MM/dd"}
+                                        value={selectedDate}
+                                    />
+                                </FormControl>
+                                <FormControl className={classes.formControl} style={{ width: "100%" }}>
+                                    <TextareaAutosize
+                                        value={item.desc}
+                                        minRows={4}
+                                        aria-label="maximum height"
+                                        placeholder="Description (optional)"
+                                        defaultValue=""
+                                        style={{ width: "100%" }}
+                                        onChange={(e) => {
+                                            setItem({ ...item, desc: e.target.value })
+                                        }}
+                                    />
+                                </FormControl>
+                            </DialogContent>
+                            <DialogActions className={classes.flex}>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary">  {`${isEditingEntry ? 'Update' : 'Add'}`}</Button>
+                            </DialogActions>
+                        </form>
+                    </Dialog>
+
+                </div>
+
             </div>
-            <div>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                >
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        isEditingEntry ? updateEntry(item) : addEntry(item)
-                        handleClose()
-
-                    }}>
-                        <DialogTitle className={classes.formControl}>{`${isEditingEntry ? 'Edit' : 'Add'} Entry`}</DialogTitle>
-                        <DialogContent>
-
-
-                            <FormControl fullWidth variant="outlined" className={classes.formControl}>
-                                <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="type"
-                                    value={item.type || ''}
-                                    label="type-label"
-                                    onChange={(e) => {
-                                        setItem({ ...item, type: e.target.value })
-                                    }}
-                                >
-                                    <MenuItem value={"income"}>Income</MenuItem>
-                                    <MenuItem value={"expence"}>Expence</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <FormControl variant="outlined" fullWidth className={classes.formControl}>
-
-                                <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                                <Select
-                                    autocomplete
-                                    labelId="demo-simple-select-label"
-                                    id="category"
-                                    value={item.category || ''}
-                                    label="category-label"
-                                    onChange={(e) => {
-                                        setItem({ ...item, category: e.target.value })
-                                    }}
-                                >
-                                    {/* <MenuItem value="">
-                                        <em>Please select category</em>
-                                    </MenuItem> */}
-
-                                    {checked.map((element) => {
-                                        return (
-                                            <MenuItem value={element.category}>{element.category}</MenuItem>
-                                        )
-                                    })}
-                                </Select>
-                            </FormControl>
-                            <FormControl className={classes.formControl} variant="outlined" fullWidth>
-                                <TextField
-                                    type="number"
-                                    label="Amount"
-                                    variant="outlined"
-                                    value={item.amount || ''}
-                                    onChange={(e) => {
-                                        setItem({ ...item, amount: e.target.value })
-                                    }} />
-                            </FormControl>
-                            <FormControl variant="outlined" fullWidth className={classes.formControl}>
-
-                                <InputLabel id="demo-simple-select-label">Icon</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="icon"
-                                    value={item.icon || ''}
-                                    label="icon-label"
-                                    onChange={(e) => {
-                                        setItem({ ...item, icon: e.target.value })
-                                    }}
-                                >
-                                    {icons.map((icon) => {
-                                        return (
-                                            <MenuItem value={icon}><Icon>{icon}</Icon></MenuItem>
-                                        )
-                                    })}
-                                </Select>
-                            </FormControl>
-                            <FormControl className={classes.formControl}>
-
-                                <KeyboardDatePicker
-                                    fullWidth
-                                    autoOk
-                                    variant="inline"
-                                    inputVariant="outlined"
-                                    label="With keyboard"
-                                    format="MM/dd/yyyy"
-                                    value={selectedDate}
-                                    InputAdornmentProps={{ position: "start" }}
-                                    onChange={date => handleDateChange(date)}
-                                />
-                            </FormControl>
-                            <FormControl className={classes.formControl} style={{ width: "100%" }}>
-                                <TextareaAutosize
-                                    value={item.desc}
-                                    minRows={4}
-                                    aria-label="maximum height"
-                                    placeholder="Description (optional)"
-                                    defaultValue=""
-                                    style={{ width: "100%" }}
-                                    onChange={(e) => {
-                                        setItem({ ...item, desc: e.target.value })
-                                    }}
-                                />
-                            </FormControl>
-                        </DialogContent>
-                        <DialogActions className={classes.flex}>
-                            <Button onClick={handleClose}>Cancel</Button>
-                            <Button disabled={!item.category} type='submit' onClick={handleClose} variant="contained" size="small" color="primary">  {`${isEditingEntry ? 'Update' : 'Add'}`}</Button>
-                        </DialogActions>
-                    </form>
-                </Dialog>
-
-            </div>
-
-        </div>
+      
     )
 }
 

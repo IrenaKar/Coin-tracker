@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Context } from '../../Provider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import { Fragment } from 'react';
-import { Icon, ListItemText, TextField } from '@material-ui/core';
+import { Icon, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -27,12 +27,13 @@ const useStyles = makeStyles((theme) => ({
 export default function RenderingCheckboxes() {
     const classes = useStyles();
 
-    const { categories, checked, setChecked } = useContext(Context)
+    const { checked, setChecked } = useContext(Context)
 
     const updateChecked = (prop, event, i) => {
         const old = checked[i];
         const updated = { ...old, [prop]: event.target.value };
         const clone = [...checked];
+
         clone[i] = updated;
         setChecked(clone);
     };

@@ -1,6 +1,6 @@
 export const categotiesObj = [
     {
-        id: 1,
+        id: new Date().valueOf(),
         category: "Food",
         type: 'expense',
         budget: 5000,
@@ -8,7 +8,7 @@ export const categotiesObj = [
         isEnabled: true,
     },
     {
-        id: 2,
+        id: new Date().valueOf(),
         category: "Drinks",
         type: 'expense',
         budget: 6000,
@@ -17,7 +17,7 @@ export const categotiesObj = [
 
     },
     {
-        id: 3,
+        id: new Date().valueOf(),
         category: "Utilities",
         type: 'expense',
         budget: 4500,
@@ -26,7 +26,7 @@ export const categotiesObj = [
 
     },
     {
-        id: 4,
+        id: new Date().valueOf(),
         category: "Car",
         type: 'expense',
         budget: 2000,
@@ -35,7 +35,7 @@ export const categotiesObj = [
 
     },
     {
-        id: 5,
+        id: new Date().valueOf(),
         category: "Books",
         type: 'expense',
         budget: 1500,
@@ -44,7 +44,7 @@ export const categotiesObj = [
 
     },
     {
-        id: 6,
+        id: new Date().valueOf(),
         category: "Vacation",
         type: 'expense',
         budget: 10000,
@@ -54,7 +54,7 @@ export const categotiesObj = [
 
 
     {
-        id: 6,
+        id: new Date().valueOf(),
         category: "Cat",
         type: 'expense',
         budget: 5300,

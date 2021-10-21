@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         "& > *": {
             margin: theme.spacing(1),
             width: theme.spacing(100),
-            height: theme.spacing(40),
+            // height: theme.spacing(40),
 
         },
     },
@@ -108,7 +108,7 @@ export default function Overview() {
                         <Avatar className={classes.avatarImg}>
                             <img
                                 src={el.picture.thumbnail}
-                                alt="random image"
+                                alt="random"
                                 key={el.picture}
                             />
                         </Avatar>

@@ -62,6 +62,7 @@ export default function WelcomePage() {
 
     const [list] = useState(categories);
 
+
     useEffect(() => {
         if (checked.length > 0) {
           setDisabled(false);

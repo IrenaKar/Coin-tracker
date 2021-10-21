@@ -26,6 +26,7 @@ const Provider = ({ children }) => {
   const clickHandler = (el) => {
     const findId = checked.indexOf(el);
     const newArr = [...checked];
+
     if (findId > -1) {
       newArr.splice(findId, 1);
       setChecked(newArr);
@@ -45,12 +46,22 @@ const Provider = ({ children }) => {
     })
 
     setEntries(updated)
-    // set updated categoris in LocalStorage here
+    localStorage.setItem("entries", JSON.stringify(updated))
   }
 
   const addEntry = (entry) => {
-    setEntries([entry, ...entries]);
+    const newEntry = [{ ...entry }, ...entries]
+    setEntries(newEntry)
+    localStorage.setItem("entries", JSON.stringify(newEntry))
   }
+
+  useEffect(() => {
+    const entry = localStorage.getItem("entries");
+    const savedEntry = JSON.parse(entry);
+    if (savedEntry) {
+      setEntries(savedEntry);
+    }
+  }, []);
 
   const updateCategory = (category) => {
     const updated = checked.map(c => {
@@ -62,19 +73,22 @@ const Provider = ({ children }) => {
     })
 
     setChecked(updated)
-    // set updated categoris in LocalStorage here
+    localStorage.setItem("category", JSON.stringify(updated))
   }
-
 
   const addCategory = (category) => {
-    setChecked([{ ...category }, ...checked])
-    console.log(checked)
-    // set updated categoris in LocalStorage here
-    // localStorage.setItem("category", JSON.stringify(categories))
-    // const categoriesFromStorage = localStorage.getItem("category")
-    // setCategories(JSON.parse(categoriesFromStorage))
-    // console.log(categoriesFromStorage)
+    const newChecked = [{ ...category }, ...checked]
+    setChecked(newChecked)
+    localStorage.setItem("category", JSON.stringify(newChecked))
   }
+
+  useEffect(() => {
+    const category = localStorage.getItem("category");
+    const savedCategory = JSON.parse(category);
+    if (savedCategory) {
+      setChecked(savedCategory);
+    }
+  }, []);
 
 
   return (
@@ -86,8 +100,8 @@ const Provider = ({ children }) => {
             setImg,
             categories,
             setCategories,
-            checked, 
-            setChecked, 
+            checked,
+            setChecked,
             clickHandler,
             addEntry,
             entries,
@@ -95,7 +109,7 @@ const Provider = ({ children }) => {
             addCategory,
             updateEntry,
             setEntries,
-                   }
+          }
         }
       >
 
