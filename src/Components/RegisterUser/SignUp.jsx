@@ -110,11 +110,15 @@ export default function MultilineTextFields(props) {
 
     const history = useHistory();
 
-    const handleRedirectWelcome = () => {
-        history.push({
-            pathname: "./welcome",
+    const formRef = React.useRef();
 
-        })
+    const handleRedirectWelcome = () => {
+        if (formRef.current.reportValidity()) {
+            history.push({
+                pathname: "./welcome",
+
+            })
+        }
     }
 
 
@@ -125,28 +129,30 @@ export default function MultilineTextFields(props) {
                     <Logo />
                 </div>
                 <h1 className={classes.h1}>sign up</h1>
-                <form autoComplete="off" className={classes.formStyle}>
+                <form autoComplete="off" ref={formRef} className={classes.formStyle}>
 
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" required>
                         <InputLabel htmlFor="outlined-adornment-email">Username</InputLabel>
                         <OutlinedInput
-
+error={values.email}
                             id="outlined-adornment-email"
                             label="Username"
                             variant="outlined"
                             placeholder="Username"
                             type={"email"}
-                            required={true}
+                            required
                         />
                     </FormControl>
 
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
 
                         <InputLabel
-                            error={!validLength || !validLength2 || !specialChar}
+                            error={!validLength || !validLength2 || !specialChar || !values.password}
                             htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
-                        autofocus
+                        
+                            required
+                            autofocus
                             error={!validLength || !validLength2 || !specialChar}
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}

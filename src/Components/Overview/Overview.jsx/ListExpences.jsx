@@ -29,11 +29,10 @@ export default function ListExpences() {
     const sumExpense = [];
     entries.reduce(function (res, value) {
         const newBudget = checked.find(x => x.category === value.category).budget
+        console.log(checked)
         if (!res[value.category]) {
             res[value.category] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-
             sumExpense.push(res[value.category])
-
         }
         res[value.category].amount += parseInt(value.amount);
         return res;

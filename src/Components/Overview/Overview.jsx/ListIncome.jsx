@@ -32,13 +32,13 @@ export default function ListIncome() {
     entries.reduce(function (res, value) {
         const newBudget = checked.find(x => x.category === value.category).budget
         if (!res[value.category]) {
-
+            console.log(res[value.category])
             res[value.category] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-
             sumIncome.push(res[value.category])
-
         }
         res[value.category].amount += parseInt(value.amount);
+        // console.log(parseInt(value.amount))
+        console.log(res[value.category].amount)
         return res;
     }, {});
     console.log(sumIncome)

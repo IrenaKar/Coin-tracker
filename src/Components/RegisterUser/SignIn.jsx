@@ -80,13 +80,20 @@ export default function MultilineTextFields(props) {
 
     const history = useHistory();
 
+    const formRef = React.useRef();
+
     const handleRedirect = () => {
-        history.push({
-            pathname: "./overview",
 
-        })
+        if (formRef.current.reportValidity()) {
+            history.push({
+                pathname: "./overview",
+
+            })
+        }
+
     }
-
+   
+    
     return (
         <React.Fragment>
             <Container maxWidth="sm">
@@ -94,22 +101,26 @@ export default function MultilineTextFields(props) {
                     <Logo />
                 </div>
                 <h1 className={classes.h1}>sign In</h1>
-                <form autoComplete="off" >
+                <form autoComplete="off" ref={formRef} >
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-basic">Username</InputLabel>
+                        <InputLabel error={!values.email} htmlFor="outlined-basic">Username</InputLabel>
                         <OutlinedInput
+                         error={!values.email}
+                            required
                             id="outlined-basic"
                             label="Username"
                             variant="outlined"
                             placeholder="Username"
                             type={'email'}
-                            required
+
                         />
                     </FormControl>
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
+                        <InputLabel htmlFor="outlined-adornment-password" error={!values.password}>Password</InputLabel>
                         <OutlinedInput
+                         error={!values.password}
 
+                            required
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
                             value={values.password}

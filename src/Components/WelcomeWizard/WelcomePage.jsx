@@ -73,10 +73,10 @@ export default function WelcomePage() {
                 How much money do you have at the moment?
             </Typography>
             <FormControl fullWidth className={classes.margin} variant="filled">
-                <InputLabel error={!values.amount}
+                <InputLabel  error={values.amount === '0'}
                     htmlFor="filled-adornment-amount">Amount</InputLabel>
                 <FilledInput
-                    error={!values.amount}
+                    error={values.amount === '0'}
                     fullWidth
                     type="number"
                     id="filled-adornment-amount"
@@ -85,8 +85,8 @@ export default function WelcomePage() {
                     startAdornment={<InputAdornment position="right"></InputAdornment>}
                 />
             </FormControl>
-            <div className={values.amount === 0 ? classes.error : ""}>{values.amount === 0 ? "The amount must be higher than zero" : ""}</div>
-            <Button disabled={!values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" className={classes.button}>
+            <div className={values.amount === '0' ? classes.error : ""}>{values.amount === "0" ? "The amount must be higher than zero" : ""}</div>
+            <Button disabled={values.amount === '0' || !values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" className={classes.button}>
                 add
             </Button>
 

@@ -1,4 +1,4 @@
-import { Avatar, Box, Dialog, Paper, Typography } from '@material-ui/core';
+import { Box, Dialog, Paper, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,12 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import React, { useContext, useState } from 'react';
 import AddEditCategory from './AddCategory';
 import { Context } from '../../../Provider';
-import Logo from '../../Logo/Logo';
-import HomeIcon from "@material-ui/icons/Home";
-import WidgetsIcon from "@material-ui/icons/Widgets";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
-import AddEntries from '../Overview.jsx/AddEntries';
-import { Link } from "react-router-dom";
+import Header from '../Overview.jsx/Header';
+import Menu from '../Overview.jsx/Menu';
 
 
 
@@ -51,52 +47,13 @@ const useStyles = makeStyles((theme) => ({
         borderTopRightRadius: "4px"
 
     },
-    links: {
-        color: "white",
-        textDecoration: "none"
-    },
+ 
     margin: {
         marginTop: "20px"
     },
    
 }));
 
-const styleDiv1 = {
-    backgroundColor: "#6200ee",
-    height: "70px",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-
-    div: {
-        width: "80px",
-    },
-    h2: {
-        color: "white",
-        fontFamily: "Roboto",
-    },
-    flex: {
-        display: "flex"
-    }
-};
-const styleDiv2 = {
-    backgroundColor: "#6200ee",
-    height: "70px",
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-evenly",
-    position: "fixed",
-    bottom: "0",
-    color: "white",
-    textAlign: "center",
-    fontFamily: "Roboto",
-    p: {
-        margin: '0px'
-    },
-
-}
 
 export default function Categories() {
     const classes = useStyles();
@@ -115,25 +72,7 @@ export default function Categories() {
 
     return (
         <Box>
-            <div style={styleDiv1}>
-                <div style={styleDiv1.flex}>
-                    <div style={styleDiv1.div}>
-                        <Logo />                     </div>
-                    <h2 style={styleDiv1.h2}>Overview</h2>
-                </div>
-                {img.map((el) => {
-                    return (
-                        <Avatar>
-                            <img
-                                src={el.picture.thumbnail}
-                                alt="random image"
-                                key={el.picture}
-                            />
-                        </Avatar>
-
-                    )
-                })}
-            </div>
+        <Header/>
             <Paper className={classes.margin} elevation={6}>
                 <Typography className={classes.header} variant="h6" component="h6">
                     Categories
@@ -181,24 +120,7 @@ export default function Categories() {
                 <AddEditCategory handleClose={handleClose} category={item} />
             </Dialog>
 
-            <div style={styleDiv2}>
-                <div>
-                    <Link to="overview" className={classes.links}>
-                        <HomeIcon fontSize="medium" />
-                        <p style={styleDiv2.p}>Overview</p></Link>
-                </div>
-                <div>
-                    <Link to="/categories" className={classes.links}>
-                        <WidgetsIcon fontSize="medium" />
-                        <p style={styleDiv2.p}>Categories</p></Link>
-                </div>
-                <div>
-                    <Link to="/statistics" className={classes.links}>
-                        <EqualizerIcon fontSize="medium" />
-                        <p style={styleDiv2.p}>Statistics</p></Link>
-                </div>
-                {<AddEntries />}
-            </div>
+      <Menu/>
         </Box>
     )
 }

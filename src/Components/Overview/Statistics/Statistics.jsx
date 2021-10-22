@@ -1,15 +1,11 @@
 import React, { useContext } from 'react'
-import { Avatar, Box } from '@material-ui/core';
-import HomeIcon from "@material-ui/icons/Home";
-import { Link } from "react-router-dom";
-import WidgetsIcon from "@material-ui/icons/Widgets";
-import EqualizerIcon from "@material-ui/icons/Equalizer";
-import AddEntries from '../Overview.jsx/AddEntries';
+import { Box } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 import { Context } from '../../../Provider';
 import { makeStyles } from '@material-ui/core/styles';
-import Logo from '../../Logo/Logo';
 import { Bar } from 'react-chartjs-2';
+import Header from '../Overview.jsx/Header';
+import Menu from '../Overview.jsx/Menu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,42 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
-const styleDiv1 = {
-  backgroundColor: "#6200ee",
-  height: "70px",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
 
-  div: {
-    width: "80px",
-  },
-  h2: {
-    color: "white",
-    fontFamily: "Roboto",
-  },
-  flex: {
-    display: "flex"
-  }
-};
-const styleDiv2 = {
-  backgroundColor: "#6200ee",
-  height: "70px",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-evenly",
-  position: "fixed",
-  bottom: "0",
-  color: "white",
-  textAlign: "center",
-  fontFamily: "Roboto",
-  p: {
-    margin: '0px'
-  },
-
-}
 
 export default function Statistics() {
   const { entries, img } = useContext(Context)
@@ -203,26 +164,7 @@ export default function Statistics() {
 
   return (
     <Box>
-      <div style={styleDiv1}>
-        <div style={styleDiv1.flex}>
-          <div style={styleDiv1.div}>
-            <Logo />
-          </div>
-          <h2 style={styleDiv1.h2}>Statistics</h2>
-        </div>
-        {img.map((el) => {
-          return (
-            <Avatar>
-              <img
-                src={el.picture.thumbnail}
-                alt="random image"
-                key={el.picture}
-              />
-            </Avatar>
-
-          )
-        })}
-      </div>
+    <Header/>
       <div>
         <Bar data={dataIncome} options={optionsBarIncome} />
       </div>
@@ -233,24 +175,7 @@ export default function Statistics() {
       <div style={{ paddingBottom: "80px" }}>
         <Line data={data} options={optionsLine} />
       </div>
-      <div style={styleDiv2}>
-        <div>
-          <Link to="overview" className={classes.links}>
-            <HomeIcon fontSize="medium" />
-            <p style={styleDiv2.p}>Overview</p></Link>
-        </div>
-        <div>
-          <Link to="/categories" className={classes.links}>
-            <WidgetsIcon fontSize="medium" />
-            <p style={styleDiv2.p}>Categories</p></Link>
-        </div>
-        <div>
-          <Link to="/statistics" className={classes.links}>
-            <EqualizerIcon fontSize="medium" />
-            <p style={styleDiv2.p}>Statistics</p></Link>
-        </div>
-        {<AddEntries />}
-      </div>
+ <Menu/>
     </Box>
   )
 }

@@ -36,18 +36,18 @@ const Provider = ({ children }) => {
     }
   };
 
-  const updateEntry = (entry) => {
-    const updated = entries.map(c => {
-      if (c.id === entry.id) {
-        return entry
-      } else {
-        return c
-      }
-    })
+  // const updateEntry = (entry) => {
+  //   const updated = entries.map(c => {
+  //     if (c.id === entry.id) {
+  //       return entry
+  //     } else {
+  //       return c
+  //     }
+  //   })
 
-    setEntries(updated)
-    localStorage.setItem("entries", JSON.stringify(updated))
-  }
+  //   setEntries(updated)
+  //   localStorage.setItem("entries", JSON.stringify(updated))
+  // }
 
   const addEntry = (entry) => {
     const newEntry = [{ ...entry }, ...entries]
@@ -107,7 +107,7 @@ const Provider = ({ children }) => {
             entries,
             updateCategory,
             addCategory,
-            updateEntry,
+            // updateEntry,
             setEntries,
           }
         }

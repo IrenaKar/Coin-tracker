@@ -30,19 +30,6 @@ export default function ListEntries() {
 
     const { entries } = useContext(Context)
 
-    const [open, setOpen] = useState(false)
-    const [item, setItem] = useState(null)
-
-    const handleClick = (_item) => {
-        setOpen(true)
-        setItem(_item)
-
-    }
-
-    const handleClose = () => {
-        setOpen(false)
-    }
-
     return (
         <div>
             <List>
@@ -53,15 +40,13 @@ export default function ListEntries() {
                     return (
 
                         <>
-                            <ListItem button onClick={() => {
-                                handleClick(item)
-                            }} className={classes.text}
+                            <ListItem className={classes.text}
 
                             >
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText primary={`${type} ${category}`}  secondary={selectedDate} />
+                                <ListItemText primary={`${type} ${category}`} secondary={selectedDate} />
 
                                 <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? +amount : -amount} />
                             </ListItem>
@@ -76,13 +61,10 @@ export default function ListEntries() {
             </List>
 
             <Dialog
+                // this dialog is only to call Update Entry function
 
-                open={open}
-                onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
-
-                <AddEntries handleClose={handleClose} entry={item} />
 
             </Dialog>
         </div>
