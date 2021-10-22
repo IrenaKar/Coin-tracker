@@ -71,6 +71,7 @@ export default function AddEntries(entry) {
         amount: 0,
         icon: categoryIcons[0],
         id: new Date().valueOf(),
+        date: selectedDate,
     })
 
 
@@ -89,7 +90,7 @@ export default function AddEntries(entry) {
     const { checked, addEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
-
+    const isEditingEntry = !!entry?.id
 
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
 
@@ -117,7 +118,14 @@ export default function AddEntries(entry) {
                     </Button>
                 )}
 
+                {/* {show && (
+                    <Button
+                        className={classes.btnSmall} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
+                    >
+                        add expense
+                    </Button>
 
+                )} */}
             </div>
             <div>
                 <Dialog
@@ -128,11 +136,11 @@ export default function AddEntries(entry) {
                 >
                     <form onSubmit={(e) => {
                         e.preventDefault();
-                        addEntry(item)
+                      addEntry(item)
                         handleClose()
 
                     }}>
-                        <DialogTitle className={classes.formControl}>Add Entry</DialogTitle>
+                        <DialogTitle className={classes.formControl}>{`${isEditingEntry ? 'Edit' : 'Add'} Entry`}</DialogTitle>
                         <DialogContent>
 
 
@@ -231,7 +239,7 @@ export default function AddEntries(entry) {
                         </DialogContent>
                         <DialogActions className={classes.flex}>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary"> {'Add'}</Button>
+                            <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary">  {'Add'}`</Button>
                         </DialogActions>
                     </form>
                 </Dialog>

@@ -21,7 +21,6 @@ const Provider = ({ children }) => {
 
   const [checked, setChecked] = useState([]);
 
-  const [entries, setEntries] = useState([])
 
   const clickHandler = (el) => {
     const findId = checked.indexOf(el);
@@ -35,19 +34,20 @@ const Provider = ({ children }) => {
       setChecked(newArr);
     }
   };
+  const [entries, setEntries] = useState([])
 
-  // const updateEntry = (entry) => {
-  //   const updated = entries.map(c => {
-  //     if (c.id === entry.id) {
-  //       return entry
-  //     } else {
-  //       return c
-  //     }
-  //   })
+  const updateEntry = (entry) => {
+    const updated = entries.map(c => {
+      if (c.id === entry.id) {
+        return entry
+      } else {
+        return c
+      }
+    })
 
-  //   setEntries(updated)
-  //   localStorage.setItem("entries", JSON.stringify(updated))
-  // }
+    setEntries(updated)
+    localStorage.setItem("entries", JSON.stringify(updated))
+  }
 
   const addEntry = (entry) => {
     const newEntry = [{ ...entry }, ...entries]
@@ -107,7 +107,7 @@ const Provider = ({ children }) => {
             entries,
             updateCategory,
             addCategory,
-            // updateEntry,
+            updateEntry,
             setEntries,
           }
         }

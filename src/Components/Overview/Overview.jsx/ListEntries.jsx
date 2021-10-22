@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { Context } from '../../../Provider'
 import { Icon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import AddEntries from './AddEntries'
+import EditEntries from './EditEntries';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,25 +30,41 @@ export default function ListEntries() {
 
     const { entries } = useContext(Context)
 
+    const [open, setOpen] = useState(false)
+    const [item, setItem] = useState(null)
+
+    const handleClick = (_item) => {
+        setOpen(true)
+        setItem(_item)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
     return (
         <div>
             <List>
 
                 {entries.map((item) => {
 
-                    const { type, amount, category, icon, selectedDate } = item
+                    const { id, type, amount, category, icon, selectedDate } = item
+
                     return (
 
                         <>
                             <ListItem className={classes.text}
-
+                                key={id}
+                                button onClick={() => {
+                                    handleClick(item)
+                                }}
                             >
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary={`${type} ${category}`} secondary={selectedDate} />
 
-                                <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? +amount : -amount} />
+                                <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? ` +${amount}` : -amount} />
                             </ListItem>
                             <Divider classes={{ root: classes.marginDivider }} />
                         </>
@@ -61,11 +77,11 @@ export default function ListEntries() {
             </List>
 
             <Dialog
-                // this dialog is only to call Update Entry function
-
+                open={open}
+                onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
-
+                <EditEntries handleClose={handleClose} entry={item} />
             </Dialog>
         </div>
     )
