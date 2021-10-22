@@ -71,7 +71,6 @@ export default function EditEntries({ handleClose, entry }) {
         amount: 0,
         icon: categoryIcons[0],
         id: new Date().valueOf(),
-        date: selectedDate,
     })
 
     const classes = useStyles();
@@ -87,8 +86,8 @@ export default function EditEntries({ handleClose, entry }) {
 
             <form onSubmit={(e) => {
                 e.preventDefault();
-                updateEntry(item)
-                handleClose()
+             isEditingEntry ? updateEntry(item) : addEntry(item)
+              handleClose()
 
             }}>
                 <DialogContent>
@@ -115,7 +114,7 @@ export default function EditEntries({ handleClose, entry }) {
                         <Select
                             autocomplete
                             labelId="demo-simple-select-label"
-                            id="category"
+                          
                             value={item.category || ''}
                             label="category-label"
                             onChange={(e) => {
@@ -145,7 +144,7 @@ export default function EditEntries({ handleClose, entry }) {
                         <InputLabel id="demo-simple-select-label">Icon</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
-                            id="icon"
+                          
                             value={item.icon || ''}
                             label="icon-label"
                             onChange={(e) => {
@@ -184,7 +183,7 @@ export default function EditEntries({ handleClose, entry }) {
                     </FormControl>
                 </DialogContent>
                 <DialogActions className={classes.flex}>
-                    <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>Cancel</Button>
                     <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary"> {'Edit'}</Button>
                 </DialogActions>
             </form>

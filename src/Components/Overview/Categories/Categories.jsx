@@ -99,7 +99,7 @@ export default function Categories() {
                             <ListItemIcon>
                                 <Icon >{icon}</Icon>
                             </ListItemIcon>
-                            <ListItemText primary={type + category} />
+                            <ListItemText  primary={`${type} ${category}`} />
                             <ListItemText
                                 style={{ textAlign: 'right' }}
                                 primary={hasBudget ? budget : ''}

@@ -55,6 +55,7 @@ export default function ListEntries() {
                         <>
                             <ListItem className={classes.text}
                                 key={id}
+                                id={id}
                                 button onClick={() => {
                                     handleClick(item)
                                 }}

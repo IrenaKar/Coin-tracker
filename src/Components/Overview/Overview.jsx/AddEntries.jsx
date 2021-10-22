@@ -71,7 +71,7 @@ export default function AddEntries(entry) {
         amount: 0,
         icon: categoryIcons[0],
         id: new Date().valueOf(),
-        date: selectedDate,
+        date: new Date(),
     })
 
 
@@ -87,7 +87,7 @@ export default function AddEntries(entry) {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const { checked, addEntry, entries } = useContext(Context)
+    const { checked, updateEntry, addEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
     const isEditingEntry = !!entry?.id
@@ -136,7 +136,8 @@ export default function AddEntries(entry) {
                 >
                     <form onSubmit={(e) => {
                         e.preventDefault();
-                      addEntry(item)
+                        isEditingEntry ? updateEntry(item) : addEntry(item)
+
                         handleClose()
 
                     }}>
@@ -165,7 +166,7 @@ export default function AddEntries(entry) {
                                 <Select
                                     autocomplete
                                     labelId="demo-simple-select-label"
-                                    id="category"
+                                
                                     value={item.category || ''}
                                     label="category-label"
                                     onChange={(e) => {
@@ -195,7 +196,7 @@ export default function AddEntries(entry) {
                                 <InputLabel id="demo-simple-select-label">Icon</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                                    id="icon"
+                            
                                     value={item.icon || ''}
                                     label="icon-label"
                                     onChange={(e) => {

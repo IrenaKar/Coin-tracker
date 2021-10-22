@@ -34,15 +34,20 @@ const Provider = ({ children }) => {
       setChecked(newArr);
     }
   };
+
+
+  
   const [entries, setEntries] = useState([])
 
   const updateEntry = (entry) => {
     const updated = entries.map(c => {
       if (c.id === entry.id) {
+
         return entry
       } else {
         return c
       }
+
     })
 
     setEntries(updated)
