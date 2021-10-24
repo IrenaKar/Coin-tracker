@@ -89,11 +89,12 @@ export default function Categories() {
                     </ListItem>
 
                     {checked.map((item) => {
+                      
                         const { id, icon, category, type, budget } = item
 
                         const hasBudget = budget !== 0
                         // console.log(checked)
-                        return <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} button onClick={() => {
+                        return <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} button onClick={() => {
                             handleClick(item)
                         }}>
                             <ListItemIcon>

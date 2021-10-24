@@ -48,7 +48,7 @@ export default function ListEntries() {
 
                 {entries.map((item) => {
 
-                    const { id, type, amount, category, icon, selectedDate } = item
+                    const { id, type, amount, category, icon, date } = item
 
                     return (
 
@@ -63,7 +63,7 @@ export default function ListEntries() {
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText primary={`${type} ${category}`} secondary={selectedDate} />
+                                <ListItemText primary={`${type} ${category}`} secondary={date} />
 
                                 <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? ` +${amount}` : -amount} />
                             </ListItem>

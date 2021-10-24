@@ -36,7 +36,7 @@ const Provider = ({ children }) => {
   };
 
 
-  
+
   const [entries, setEntries] = useState([])
 
   const updateEntry = (entry) => {
@@ -57,6 +57,7 @@ const Provider = ({ children }) => {
   const addEntry = (entry) => {
     const newEntry = [{ ...entry }, ...entries]
     setEntries(newEntry)
+
     localStorage.setItem("entries", JSON.stringify(newEntry))
   }
 

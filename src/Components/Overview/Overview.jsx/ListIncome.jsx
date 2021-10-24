@@ -31,14 +31,12 @@ export default function ListIncome() {
     const sumIncome = [];
     entries.reduce(function (res, value) {
         const newBudget = checked.find(x => x.category === value.category).budget
-        if (!res[value.category]) {
-            console.log(res[value.category])
-            res[value.category] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-            sumIncome.push(res[value.category])
+        if (!res[value.type]) {
+            res[value.type] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
+            sumIncome.push(res[value.type])
         }
-        res[value.category].amount += parseInt(value.amount);
-        // console.log(parseInt(value.amount))
-        console.log(res[value.category].amount)
+        res[value.type].amount += parseInt(value.amount);
+        console.log(res[value.type].amount)
         return res;
     }, {});
     console.log(sumIncome)
@@ -52,12 +50,12 @@ export default function ListIncome() {
                     return (
 
                         <>
-                            <ListItem className={classes.incomeStyle} className={classes.text}>
+                            <ListItem id={item.id} key={item.id} className={classes.incomeStyle} className={classes.text}>
                                 <ListItemIcon>
                                     <Icon>{item.icon}</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.type} ${item.category}`} />
-                                <ListItemText style={{ textAlign: "right" }} className={classes.incomeStyle} primary={`${item.amount} ${!item.budget ? "" : "/"} ${!item.budget ? "" : item.budget}`} /> 
+                                <ListItemText style={{ textAlign: "right" }} className={classes.incomeStyle} primary={`${item.amount} ${!item.budget ? "" : "/"} ${!item.budget ? "" : item.budget}`} />
                             </ListItem>
                             <div style={{ marginLeft: '50px', marginRight: '10px' }}>
                                 <ProgressBar value={item.amount} max={item.budget} />

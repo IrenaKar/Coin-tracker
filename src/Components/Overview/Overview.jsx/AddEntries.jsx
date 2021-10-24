@@ -5,7 +5,7 @@ import { Context } from '../../../Provider';
 import AddIcon from '@material-ui/icons/Add';
 
 import { TextareaAutosize } from '@material-ui/core';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { categoryIcons } from '../../Data/CategoryIcons';
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -137,11 +137,11 @@ export default function AddEntries(entry) {
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         isEditingEntry ? updateEntry(item) : addEntry(item)
-
+                        console.log(item)
                         handleClose()
 
                     }}>
-                        <DialogTitle className={classes.formControl}>{`${isEditingEntry ? 'Edit' : 'Add'} Entry`}</DialogTitle>
+                        <DialogTitle className={classes.formControl}>Add Entry</DialogTitle>
                         <DialogContent>
 
 
@@ -166,7 +166,7 @@ export default function AddEntries(entry) {
                                 <Select
                                     autocomplete
                                     labelId="demo-simple-select-label"
-                                
+                                    
                                     value={item.category || ''}
                                     label="category-label"
                                     onChange={(e) => {
@@ -196,7 +196,7 @@ export default function AddEntries(entry) {
                                 <InputLabel id="demo-simple-select-label">Icon</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
-                            
+
                                     value={item.icon || ''}
                                     label="icon-label"
                                     onChange={(e) => {
@@ -212,16 +212,17 @@ export default function AddEntries(entry) {
                             </FormControl>
                             <FormControl className={classes.formControl}>
 
-                                <KeyboardDatePicker
+                                <DatePicker
                                     clearable
                                     label="Start Date"
                                     id="startDate"
-                                    selected={selectedDate}
-                                    onChange={(date) => {
-                                        setSelectedDate(date);
+                                    selected={item.date}
+                                    value={item.date}
+
+                                    onChange={(e) => {
+                                        setItem(...item, e.target.value);
                                     }}
                                     format={"yyyy/MM/dd"}
-                                    value={selectedDate}
                                 />
                             </FormControl>
                             <FormControl className={classes.formControl} style={{ width: "100%" }}>
@@ -240,7 +241,7 @@ export default function AddEntries(entry) {
                         </DialogContent>
                         <DialogActions className={classes.flex}>
                             <Button onClick={handleClose}>Cancel</Button>
-                            <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary">  {'Add'}`</Button>
+                            <Button disabled={!item.category} type='submit' variant="contained" size="small" color="primary"> Add</Button>
                         </DialogActions>
                     </form>
                 </Dialog>

@@ -30,11 +30,11 @@ export default function ListExpences() {
     entries.reduce(function (res, value) {
         const newBudget = checked.find(x => x.category === value.category).budget
         console.log(checked)
-        if (!res[value.category]) {
-            res[value.category] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-            sumExpense.push(res[value.category])
+        if (!res[value.type]) {
+            res[value.type] = {category: value.category, amount: 0, type: value.type, icon: value.icon, date: value.date,  id: value.id, budget: +newBudget };
+            sumExpense.push(res[value.type])
         }
-        res[value.category].amount += parseInt(value.amount);
+        res[value.type].amount += parseInt(value.amount);
         return res;
     }, {});
     console.log(sumExpense)
@@ -48,7 +48,7 @@ export default function ListExpences() {
 
                     return (
                         <>
-                            <ListItem style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }}
+                            <ListItem id={item.id} key={item.id} style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }}
                                 className={classes.text}>
                                 <ListItemIcon>
                                     <Icon style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }} >{item.icon}</Icon>
