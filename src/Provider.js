@@ -49,7 +49,7 @@ const Provider = ({ children }) => {
       }
 
     })
-    
+
     setEntries(updated)
     localStorage.setItem("entries", JSON.stringify(updated))
   }
@@ -96,12 +96,23 @@ const Provider = ({ children }) => {
     }
   }, []);
 
+  const handleRemoveItem = idx => {
+    const temp = [...entries];
+
+    temp.splice(idx, 1);
+    console.log(temp)
+    setEntries(temp);
+    localStorage.setItem("category", JSON.stringify(temp))
+
+  }
+
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Context.Provider
         value={
           {
+            handleRemoveItem,
             img,
             setImg,
             categories,

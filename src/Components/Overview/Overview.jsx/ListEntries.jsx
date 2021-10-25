@@ -23,13 +23,17 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "15px",
         fontFamily: "Roboto",
     },
+    width: {
+        minWidth: "0%",
+        cursor: "pointer"
+    }
 
 }));
 export default function ListEntries() {
 
     const classes = useStyles();
 
-    const { entries } = useContext(Context)
+    const { entries, handleRemoveItem, addEntry } = useContext(Context)
 
     const [open, setOpen] = useState(false)
     const [item, setItem] = useState(null)
@@ -50,15 +54,14 @@ export default function ListEntries() {
                 {entries.map((item) => {
 
                     const { id, type, amount, category, icon, selectedDate } = item
+                    console.log(id)
                     return (
 
                         <>
                             <ListItem className={classes.text}
                                 key={id}
                                 id={id}
-                                button onClick={() => {
-                                    handleClick(item)
-                                }}
+                                style={{ paddingBottom: "0" }}
                             >
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
@@ -66,6 +69,41 @@ export default function ListEntries() {
                                 <ListItemText primary={`${type} ${category}`} secondary={selectedDate} />
 
                                 <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? ` +${amount}` : -amount} />
+
+                            </ListItem>
+
+
+
+
+
+                            <ListItem style={{ paddingTop: "0" }}  >
+                                <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto" }}  >
+                                    <Icon
+                                        style={{ fontSize: "18px" }}
+                                        button onClick={() => {
+                                            handleClick(item)
+                                        }}>
+                                        {'edit'}
+                                    </Icon>
+                                </ListItemIcon>
+                                <ListItemIcon classes={{ root: classes.width }}  >
+                                    <Icon
+                                        style={{ fontSize: "18px" }}
+                                        button onClick={() => {
+                                            handleRemoveItem()
+                                        }}>
+                                        {'delete'}
+                                    </Icon>
+                                </ListItemIcon>
+                                <ListItemIcon classes={{ root: classes.width }} >
+                                    <Icon
+                                        style={{ fontSize: "18px" }}
+                                        button onClick={() => {
+                                         addEntry(item)
+                                        }}>
+                                        {'bookmark'}
+                                    </Icon>
+                                </ListItemIcon>
                             </ListItem>
                             <Divider classes={{ root: classes.marginDivider }} />
                         </>

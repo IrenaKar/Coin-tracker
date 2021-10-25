@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Statistics() {
-  const { entries, img } = useContext(Context)
+  const { entries } = useContext(Context)
   const classes = useStyles();
 
   const valuesIncome = []
@@ -56,18 +56,18 @@ export default function Statistics() {
     }
   })
   const valueCategories = []
-  const categoryAmount = []
+  const categoryDate = []
 
   entries.map((x) => {
     valueCategories.push(x.category)
-    categoryAmount.push(x.amount)
+    categoryDate.push(x.date)
 
   })
 
 
 
   const data = {
-    labels: categoryAmount
+    labels: categoryDate
     ,
     datasets: [
       {
