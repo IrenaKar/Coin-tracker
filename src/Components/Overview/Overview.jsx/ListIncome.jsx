@@ -28,18 +28,21 @@ export default function ListIncome() {
     const { entries, checked } = useContext(Context)
 
 
-    const sumIncome = [];
-    entries.reduce(function (res, value) {
-        const newBudget = checked.find(x => x.category === value.category).budget
-        if (!res[value.type]) {
-            res[value.type] = { category: value.category, amount: 0, type: value.type, icon: value.icon, budget: +newBudget };
-            sumIncome.push(res[value.type])
-        }
-        res[value.type].amount += parseInt(value.amount);
-        console.log(res[value.type].amount)
-        return res;
-    }, {});
-    console.log(sumIncome)
+    
+    const sumIncome = [...entries.reduce((r, o) => {
+        const key = o.category  + o.type;
+        
+        const item = r.get(key) || Object.assign({}, o, {
+          amount: 0,
+          newBudget: checked.find(x => x.category === o.category).budget,
+        });
+        
+        item.amount += parseInt(o.amount);
+      
+        return r.set(key, item);
+      }, new Map).values()];
+      
+      console.log(sumIncome);
 
     return (
         <div>
@@ -55,10 +58,10 @@ export default function ListIncome() {
                                     <Icon>{item.icon}</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.type} ${item.category}`} />
-                                <ListItemText style={{ textAlign: "right" }} className={classes.incomeStyle} primary={`${item.amount} ${!item.budget ? "" : "/"} ${!item.budget ? "" : item.budget}`} />
+                                <ListItemText style={{ textAlign: "right" }} className={classes.incomeStyle} primary={`${item.amount} ${!item.newBudget ? "" : "/"} ${!item.newBudget ? "" : item.newBudget}`} />
                             </ListItem>
                             <div style={{ marginLeft: '50px', marginRight: '10px' }}>
-                                <ProgressBar value={item.amount} max={item.budget} />
+                                <ProgressBar value={item.amount} max={item.newBudget} />
                             </div>
 
                         </>

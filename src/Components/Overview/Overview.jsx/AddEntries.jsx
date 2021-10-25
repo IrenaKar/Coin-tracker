@@ -62,10 +62,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function AddEntries(entry) {
+export default function AddEntries() {
     const classes = useStyles();
 
-    const [item, setItem] = useState(entry || {
+    const [item, setItem] = useState({
         type: '',
         category: '',
         amount: 0,
@@ -90,7 +90,7 @@ export default function AddEntries(entry) {
     const { checked, updateEntry, addEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
-    const isEditingEntry = !!entry?.id
+    // const isEditingEntry = !!entry?.id
 
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
 
@@ -136,7 +136,7 @@ export default function AddEntries(entry) {
                 >
                     <form onSubmit={(e) => {
                         e.preventDefault();
-                        isEditingEntry ? updateEntry(item) : addEntry(item)
+                        addEntry(item)
                         console.log(item)
                         handleClose()
 
@@ -166,7 +166,7 @@ export default function AddEntries(entry) {
                                 <Select
                                     autocomplete
                                     labelId="demo-simple-select-label"
-                                    
+
                                     value={item.category || ''}
                                     label="category-label"
                                     onChange={(e) => {
@@ -212,15 +212,15 @@ export default function AddEntries(entry) {
                             </FormControl>
                             <FormControl className={classes.formControl}>
 
-                                <DatePicker
+                                <KeyboardDatePicker
                                     clearable
                                     label="Start Date"
                                     id="startDate"
-                                    selected={item.date}
-                                    value={item.date}
+                                    selected={selectedDate}
+                                    value={selectedDate}
 
-                                    onChange={(e) => {
-                                        setItem(...item, e.target.value);
+                                    onChange={(date) => {
+                                        setSelectedDate(date);
                                     }}
                                     format={"yyyy/MM/dd"}
                                 />

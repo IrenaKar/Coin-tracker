@@ -3,7 +3,7 @@ import { Context } from '../../../Provider'
 import { categoryIcons } from '../../Data/CategoryIcons'
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Icon, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from '@material-ui/core';
-import { DatePicker } from '@material-ui/pickers';
+import { DatePicker, KeyboardDatePicker } from '@material-ui/pickers';
 import AddEntries from './AddEntries';
 
 
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditEntries({ handleClose, entry }) {
 
-    const [item, setItem] = useState(entry || {
+    const [item, setItem] = useState({
         type: '',
 
         category: '',
@@ -74,9 +74,9 @@ export default function EditEntries({ handleClose, entry }) {
         date: new Date(),
 
     })
-    const { checked, entries, addEntry, updateEntry,setEntries } = useContext(Context)
+    const { checked, entries, addEntry, updateEntry, setEntries } = useContext(Context)
 
-  
+
     const classes = useStyles();
 
     const isEditingEntry = !!entry?.id
@@ -164,13 +164,18 @@ export default function EditEntries({ handleClose, entry }) {
                     </FormControl>
                     <FormControl className={classes.formControl}>
 
-                        <DatePicker
-
+                        <KeyboardDatePicker
+                            clearable
+                            label="Start Date"
+                            id="startDate"
+                            selected={selectedDate}
                             value={selectedDate}
-                            onChange={date => setSelectedDate(date)}
 
+                            onChange={(date) => {
+                                setSelectedDate(date);
+                            }}
+                            format={"yyyy/MM/dd"}
                         />
-
                     </FormControl>
                     <FormControl className={classes.formControl} style={{ width: "100%" }}>
                         <TextareaAutosize

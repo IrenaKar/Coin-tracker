@@ -26,18 +26,49 @@ export default function ListExpences() {
 
     const { entries, checked } = useContext(Context)
 
-    const sumExpense = [];
-    entries.reduce(function (res, value) {
-        const newBudget = checked.find(x => x.category === value.category).budget
-        console.log(checked)
-        if (!res[value.type]) {
-            res[value.type] = {category: value.category, amount: 0, type: value.type, icon: value.icon, date: value.date,  id: value.id, budget: +newBudget };
-            sumExpense.push(res[value.type])
-        }
-        res[value.type].amount += parseInt(value.amount);
-        return res;
-    }, {});
-    console.log(sumExpense)
+    // const sumExpense = [];
+    // entries.reduce(function (res, value) {
+    //     const newBudget = checked.find(x => x.category === value.category).budget
+    //     console.log(checked)
+    //     if (!res[value.category]) {
+    //         res[value.category] = {category: value.category, amount: 0, type: value.type, icon: value.icon, id: value.id, budget: +newBudget };
+    //         sumExpense.push(res[value.category])
+    //     }
+    //     res[value.category].amount += parseInt(value.amount);
+    //     return res;
+    // }, {});
+    // console.log(sumExpense)
+
+    // const sumExpense = [...entries.reduce((r, o) => {
+    //     const key = o.category + o.type;
+        
+    //     const item = r.get(key) || Object.assign({}, o, {
+    //       amount: 0,
+    //     });
+        
+    //     item.amount += o.amount;
+      
+    //     return r.set(key, item);
+    //   }, new Map).values()];
+      
+    //   console.log(sumExpense);
+
+    const sumExpense = [...entries.reduce((r, o) => {
+
+        const key = o.category  + o.type;
+        
+        const item = r.get(key) || Object.assign({}, o, {
+          amount: 0,
+          newBudget: checked.find(x => x.category === o.category).budget,
+        });
+        
+        item.amount += parseInt(o.amount);
+     
+      
+        return r.set(key, item);
+      }, new Map).values()];
+      
+      console.log(sumExpense);
 
     return (
         <div>
@@ -48,16 +79,16 @@ export default function ListExpences() {
 
                     return (
                         <>
-                            <ListItem id={item.id} key={item.id} style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }}
+                            <ListItem id={item.id} key={item.id} style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }}
                                 className={classes.text}>
                                 <ListItemIcon>
-                                    <Icon style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }} >{item.icon}</Icon>
+                                    <Icon style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }} >{item.icon}</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.type} ${item.category}`}/>  
-                                <ListItemText style={(item.budget === 0 || item.amount < item.budget) ? { color: "black" } : { color: "red" }, {textAlign: 'right'}} className={classes.expenseStyle} primary={`${item.amount} ${!item.budget ? "" : "/"} ${!item.budget ? "" : item.budget}`}/>
+                                <ListItemText style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }, {textAlign: 'right'}} className={classes.expenseStyle} primary={`${item.amount} ${!item.newBudget ? "" : "/"} ${!item.newBudget ? "" : item.newBudget}`}/>
                             </ListItem>
                             <div style={{ marginLeft: '50px', marginRight: '10px' }}>
-                                <ProgressBar value={item.amount} max={item.budget} />
+                                <ProgressBar value={item.amount} max={item.newBudget} />
                             </div>
 
                         </>

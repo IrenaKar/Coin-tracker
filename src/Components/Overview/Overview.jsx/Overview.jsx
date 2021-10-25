@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     },
     margin: {
         marginTop: "40px"
+    },
+    marginBottom: {
+        marginBottom: "100px"
+
     }
 
 }));
@@ -55,7 +59,7 @@ export default function Overview() {
                     </List>
 
                 </Paper>
-                <Paper className={classes.margin}  elevation={6}>
+                <Paper className={classes.margin}  elevation={6} >
                     <Typography className={classes.header}>
                         Expences
                     </Typography>
@@ -71,7 +75,7 @@ export default function Overview() {
                     </Typography>
 
 
-                    <List>
+                    <List  className={classes.marginBottom} >
                         <ListEntries />
 
                     </List>
