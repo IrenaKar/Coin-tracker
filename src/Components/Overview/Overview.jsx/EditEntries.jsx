@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react'
 import { Context } from '../../../Provider'
 import { categoryIcons } from '../../Data/CategoryIcons'
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Icon, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from '@material-ui/core';
-import { DatePicker, KeyboardDatePicker } from '@material-ui/pickers';
-import AddEntries from './AddEntries';
+import { Button, DialogActions, DialogContent, DialogTitle, FormControl, Icon, InputLabel, MenuItem, Select, TextareaAutosize, TextField } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditEntries({ handleClose, entry }) {
 
-    const [item, setItem] = useState({
+    const [item, setItem] = useState(entry || {
         type: '',
 
         category: '',
@@ -74,12 +74,11 @@ export default function EditEntries({ handleClose, entry }) {
         date: new Date(),
 
     })
-    const { checked, entries, addEntry, updateEntry, setEntries } = useContext(Context)
+    const { checked, entries, updateEntry } = useContext(Context)
 
 
     const classes = useStyles();
 
-    const isEditingEntry = !!entry?.id
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
     const [selectedDate, setSelectedDate] = useState();
 
@@ -89,7 +88,7 @@ export default function EditEntries({ handleClose, entry }) {
 
             <form onSubmit={(e) => {
                 e.preventDefault();
-                isEditingEntry ? updateEntry(item) : addEntry(item)
+                updateEntry(item)
 
                 handleClose()
 

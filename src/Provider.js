@@ -49,7 +49,7 @@ const Provider = ({ children }) => {
       }
 
     })
-
+    
     setEntries(updated)
     localStorage.setItem("entries", JSON.stringify(updated))
   }

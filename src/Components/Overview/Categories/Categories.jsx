@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
         borderTopRightRadius: "4px"
 
     },
- 
+
     margin: {
         marginTop: "20px"
     },
-   
+
 }));
 
 
@@ -72,7 +72,7 @@ export default function Categories() {
 
     return (
         <Box>
-        <Header/>
+            <Header />
             <Paper className={classes.margin} elevation={6}>
                 <Typography className={classes.header} variant="h6" component="h6">
                     Categories
@@ -89,7 +89,7 @@ export default function Categories() {
                     </ListItem>
 
                     {checked.map((item) => {
-                      
+
                         const { id, icon, category, type, budget } = item
 
                         const hasBudget = budget !== 0
@@ -100,7 +100,7 @@ export default function Categories() {
                             <ListItemIcon>
                                 <Icon >{icon}</Icon>
                             </ListItemIcon>
-                            <ListItemText  primary={`${type} ${category}`} />
+                            <ListItemText primary={`${type} ${category}`} />
                             <ListItemText
                                 style={{ textAlign: 'right' }}
                                 primary={hasBudget ? budget : ''}
@@ -121,7 +121,7 @@ export default function Categories() {
                 <AddEditCategory handleClose={handleClose} category={item} />
             </Dialog>
 
-      <Menu/>
+            <Menu />
         </Box>
     )
 }

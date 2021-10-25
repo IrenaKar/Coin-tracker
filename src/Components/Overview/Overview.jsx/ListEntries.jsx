@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import EditEntries from './EditEntries';
 
 
+
 const useStyles = makeStyles((theme) => ({
 
     expenseStyle: {

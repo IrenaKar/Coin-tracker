@@ -5,9 +5,9 @@ import { Context } from '../../../Provider';
 import AddIcon from '@material-ui/icons/Add';
 
 import { TextareaAutosize } from '@material-ui/core';
-import { DatePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 import { categoryIcons } from '../../Data/CategoryIcons';
-import DateFnsUtils from '@date-io/date-fns';
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -62,10 +62,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function AddEntries() {
+export default function AddEntries({ entry }) {
     const classes = useStyles();
 
-    const [item, setItem] = useState({
+    const [item, setItem] = useState(entry || {
         type: '',
         category: '',
         amount: 0,
@@ -87,10 +87,9 @@ export default function AddEntries() {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const { checked, updateEntry, addEntry, entries } = useContext(Context)
+    const { checked, addEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
-    // const isEditingEntry = !!entry?.id
 
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
 
@@ -118,14 +117,6 @@ export default function AddEntries() {
                     </Button>
                 )}
 
-                {/* {show && (
-                    <Button
-                        className={classes.btnSmall} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
-                    >
-                        add expense
-                    </Button>
-
-                )} */}
             </div>
             <div>
                 <Dialog
