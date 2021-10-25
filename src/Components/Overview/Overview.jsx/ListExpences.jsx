@@ -26,33 +26,6 @@ export default function ListExpences() {
 
     const { entries, checked } = useContext(Context)
 
-    // const sumExpense = [];
-    // entries.reduce(function (res, value) {
-    //     const newBudget = checked.find(x => x.category === value.category).budget
-    //     console.log(checked)
-    //     if (!res[value.category]) {
-    //         res[value.category] = {category: value.category, amount: 0, type: value.type, icon: value.icon, id: value.id, budget: +newBudget };
-    //         sumExpense.push(res[value.category])
-    //     }
-    //     res[value.category].amount += parseInt(value.amount);
-    //     return res;
-    // }, {});
-    // console.log(sumExpense)
-
-    // const sumExpense = [...entries.reduce((r, o) => {
-    //     const key = o.category + o.type;
-        
-    //     const item = r.get(key) || Object.assign({}, o, {
-    //       amount: 0,
-    //     });
-        
-    //     item.amount += o.amount;
-      
-    //     return r.set(key, item);
-    //   }, new Map).values()];
-      
-    //   console.log(sumExpense);
-
     const sumExpense = [...entries.reduce((r, o) => {
 
         const key = o.category  + o.type;
