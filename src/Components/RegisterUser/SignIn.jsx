@@ -159,7 +159,7 @@ export default function MultilineTextFields(props) {
 
                         <Typography>
 
-                            Dont have account yet?
+                            Don't have account yet?
 
                         </Typography>
                         <Typography>

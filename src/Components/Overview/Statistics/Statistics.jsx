@@ -32,22 +32,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+
 export default function Statistics() {
   const { entries } = useContext(Context)
+
   const classes = useStyles();
+
+  const sumIncome = [...entries.reduce((r, o) => {
+    const key = o.category + o.type;
+    const item = r.get(key) || Object.assign({}, o, {
+      amount: 0,
+    });
+    item.amount += parseInt(o.amount);
+    return r.set(key, item);
+  }, new Map).values()];
+
+  const sumExpense = [...entries.reduce((r, o) => {
+    const key = o.category + o.type;
+    const item = r.get(key) || Object.assign({}, o, {
+      amount: 0,
+    });
+    item.amount += parseInt(o.amount);
+    return r.set(key, item);
+  }, new Map).values()];
+
 
   const valuesIncome = []
   const valuesExpense = []
-  entries.map((x) => {
-    if (x.type === "income") {
-      valuesIncome.push(x.amount)
-    } else {
-      valuesExpense.push(x.amount)
-    }
+  sumIncome.map((x) => {
+    valuesIncome.push(x.amount)
   })
+  sumExpense.map((x) => {
+    valuesExpense.push(x.amount)
+  })
+
   const valueIncomeCategories = []
   const valueExpenseCategories = []
-  entries.map((x) => {
+  
+  sumExpense.map((x) => {
     if (x.type === "income") {
       valueIncomeCategories.push(x.category)
     } else {
@@ -71,17 +93,19 @@ export default function Statistics() {
     ,
     datasets: [
       {
+        
         label: "Income",
         data: valuesIncome,
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)"
+        borderColor: "#03dac5"
       },
       {
         label: "Expense",
         data: valuesExpense,
-        fill: false,
-        borderColor: "#742774"
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "red"
       }
     ],
   };
@@ -95,7 +119,7 @@ export default function Statistics() {
         data: valuesIncome,
         fill: false,
         backgroundColor: '#03dac5',
-        borderColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: '#03dac5',
       },
     ],
   };
@@ -109,7 +133,7 @@ export default function Statistics() {
         data: valuesExpense,
         fill: false,
         backgroundColor: 'red',
-        borderColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'red',
       },
     ],
   };
@@ -164,7 +188,7 @@ export default function Statistics() {
 
   return (
     <Box>
-    <Header/>
+      <Header />
       <div>
         <Bar data={dataIncome} options={optionsBarIncome} />
       </div>
@@ -172,10 +196,10 @@ export default function Statistics() {
         <Bar data={dataExpense} options={optionsBarExpense} />
       </div>
 
-      <div style={{ paddingBottom: "80px" }}>
+      <div style={{ paddingBottom: "80px", marginTop: "50px" }}>
         <Line data={data} options={optionsLine} />
       </div>
- <Menu/>
+      <Menu />
     </Box>
   )
 }

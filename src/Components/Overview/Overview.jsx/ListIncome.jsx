@@ -28,21 +28,20 @@ export default function ListIncome() {
     const { entries, checked } = useContext(Context)
 
 
-    
+
     const sumIncome = [...entries.reduce((r, o) => {
-        const key = o.category  + o.type;
-        
+        const key = o.category + o.type;
         const item = r.get(key) || Object.assign({}, o, {
-          amount: 0,
-          newBudget: checked.find(x => x.category === o.category).budget,
+            amount: 0,
+            newBudget: checked.find(x => x.category === o.category).budget,
         });
-        
+
         item.amount += parseInt(o.amount);
-      
+
         return r.set(key, item);
-      }, new Map).values()];
-      
-      console.log(sumIncome);
+    }, new Map).values()];
+
+    console.log(sumIncome);
 
     return (
         <div>

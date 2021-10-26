@@ -5,7 +5,6 @@ import { Context } from '../../../Provider';
 import AddIcon from '@material-ui/icons/Add';
 
 import { TextareaAutosize } from '@material-ui/core';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 import { categoryIcons } from '../../Data/CategoryIcons';
 
 
@@ -70,8 +69,9 @@ export default function AddEntries() {
         category: '',
         amount: 0,
         icon: categoryIcons[0],
-        id: new Date().valueOf(),
+        id: new Date().valueOf() || "",
         date: new Date(),
+        desc: ''
     })
 
 
@@ -87,7 +87,7 @@ export default function AddEntries() {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const { checked, addEntry, updateEntry, entries } = useContext(Context)
+    const { checked, addEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
 
@@ -129,10 +129,8 @@ export default function AddEntries() {
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         addEntry(item)
-
                         console.log(item)
                         handleClose()
-
                     }}>
                         <DialogTitle className={classes.formControl}>Add Entry</DialogTitle>
                         <DialogContent>
@@ -203,20 +201,16 @@ export default function AddEntries() {
                                     })}
                                 </Select>
                             </FormControl>
-                            <FormControl className={classes.formControl}>
+                            <FormControl fullWidth className={classes.formControl}>
+                                <TextField
+                                    type="date"
 
-                                <KeyboardDatePicker
-                                    clearable
-                                    label="Start Date"
-                                    id="startDate"
-                                    selected={selectedDate}
-                                    value={selectedDate}
+                                    variant="outlined"
+                                    value={item.date || ''}
+                                    onChange={(e) => {
+                                        setItem({ ...item, date: e.target.value })
+                                    }} />
 
-                                    onChange={(date) => {
-                                        setSelectedDate(date);
-                                    }}
-                                    format={"yyyy/MM/dd"}
-                                />
                             </FormControl>
                             <FormControl className={classes.formControl} style={{ width: "100%" }}>
                                 <TextareaAutosize

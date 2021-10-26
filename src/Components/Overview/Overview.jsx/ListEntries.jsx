@@ -7,6 +7,7 @@ import EditEntries from './EditEntries';
 import DeleteIcon from "@material-ui/icons/Delete"
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import EditIcon from '@material-ui/icons/Edit';
+import AddEntries from './AddEntries';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -56,20 +57,20 @@ export default function ListEntries() {
 
                 {entries.map((item) => {
 
-                    const { id, type, amount, category, icon, selectedDate } = item
+                    const { id, type, amount, category, icon, date } = item
                     console.log(id)
                     return (
 
                         <>
                             <ListItem className={classes.text}
-                                key={id}
-                                id={id}
+                               
+                               
                                 style={{ paddingBottom: "0" }}
                             >
                                 <ListItemIcon>
                                     <Icon>{icon}</Icon>
                                 </ListItemIcon>
-                                <ListItemText primary={`${type} ${category}`} secondary={selectedDate} />
+                                <ListItemText primary={`${type} ${category}`} secondary={date} />
 
                                 <ListItemText style={{ textAlign: "right" }} className={type === "income" ? classes.incomeStyle : classes.expenseStyle} primary={type === "income" ? ` +${amount}` : -amount} />
 
@@ -81,15 +82,15 @@ export default function ListEntries() {
 
                             <ListItem style={{ paddingTop: "0" }}  >
                                 <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto" }}  >
-                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
+                                    <IconButton classes={{ root: classes.padding }} aria-label="edit entry"
                                         button onClick={() => {
-                                            handleClick()
+                                            handleClick(item)
                                         }}>
                                         <EditIcon style={{ fontSize: "18px" }} />
                                     </IconButton>
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }}  >
-                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
+                                    <IconButton classes={{ root: classes.padding }} aria-label="delete entry"
                                         button onClick={() => {
                                             handleRemoveItem()
                                         }}>
@@ -99,7 +100,7 @@ export default function ListEntries() {
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }} >
 
-                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
+                                    <IconButton classes={{ root: classes.padding }} aria-label="copy entry"
                                         button onClick={() => {
                                             addEntry(item)
                                         }}>

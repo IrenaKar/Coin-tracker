@@ -1,9 +1,5 @@
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import React, { useState, useEffect } from "react";
 import { categotiesObj } from "../src/Components/Data/Categories"
-import DateFnsUtils from '@date-io/date-fns';
-
-
 
 export const Context = React.createContext();
 
@@ -60,6 +56,7 @@ const Provider = ({ children }) => {
 
     localStorage.setItem("entries", JSON.stringify(newEntry))
   }
+ 
 
   useEffect(() => {
     const entry = localStorage.getItem("entries");
@@ -108,10 +105,11 @@ const Provider = ({ children }) => {
 
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    
       <Context.Provider
         value={
           {
+          
             handleRemoveItem,
             img,
             setImg,
@@ -134,7 +132,7 @@ const Provider = ({ children }) => {
 
         {children}
       </Context.Provider>
-    </MuiPickersUtilsProvider>
+  
   );
 };
 
