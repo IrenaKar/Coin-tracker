@@ -74,10 +74,11 @@ export default function EditEntries({ handleClose, entry }) {
         date: new Date(),
 
     })
-    const { checked, entries, updateEntry } = useContext(Context)
+    const { checked, entries, updateEntry, addEntry } = useContext(Context)
 
 
     const classes = useStyles();
+
 
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
     const [selectedDate, setSelectedDate] = useState();
@@ -88,7 +89,7 @@ export default function EditEntries({ handleClose, entry }) {
 
             <form onSubmit={(e) => {
                 e.preventDefault();
-                updateEntry(item)
+              updateEntry(item) 
 
                 handleClose()
 

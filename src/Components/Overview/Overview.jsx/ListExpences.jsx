@@ -52,7 +52,7 @@ export default function ListExpences() {
 
                     return (
                         <>
-                            <ListItem id={item.id} key={item.id} style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }}
+                            <ListItem key={item.id} style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }}
                                 className={classes.text}>
                                 <ListItemIcon>
                                     <Icon style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }} >{item.icon}</Icon>

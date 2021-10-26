@@ -62,10 +62,10 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function AddEntries({ entry }) {
+export default function AddEntries() {
     const classes = useStyles();
 
-    const [item, setItem] = useState(entry || {
+    const [item, setItem] = useState({
         type: '',
         category: '',
         amount: 0,
@@ -87,11 +87,12 @@ export default function AddEntries({ entry }) {
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const { checked, addEntry, entries } = useContext(Context)
+    const { checked, addEntry, updateEntry, entries } = useContext(Context)
 
     const [show, setShow] = useState(false);
 
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
+
 
     return (
 
@@ -128,6 +129,7 @@ export default function AddEntries({ entry }) {
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         addEntry(item)
+
                         console.log(item)
                         handleClose()
 

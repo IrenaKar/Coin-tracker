@@ -53,7 +53,7 @@ export default function ListIncome() {
                     return (
 
                         <>
-                            <ListItem id={item.id} key={item.id} className={classes.incomeStyle} className={classes.text}>
+                            <ListItem key={item.id} className={classes.incomeStyle} className={classes.text}>
                                 <ListItemIcon>
                                     <Icon>{item.icon}</Icon>
                                 </ListItemIcon>

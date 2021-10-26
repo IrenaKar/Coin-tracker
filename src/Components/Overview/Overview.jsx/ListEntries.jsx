@@ -1,11 +1,12 @@
-import { Dialog, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { Dialog, Divider, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
 import { Context } from '../../../Provider'
 import { Icon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import EditEntries from './EditEntries';
-
-
+import DeleteIcon from "@material-ui/icons/Delete"
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -25,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
     width: {
         minWidth: "0%",
-        cursor: "pointer"
+    },
+    padding: {
+        padding: "0px",
     }
 
 }));
@@ -78,31 +81,30 @@ export default function ListEntries() {
 
                             <ListItem style={{ paddingTop: "0" }}  >
                                 <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto" }}  >
-                                    <Icon
-                                        style={{ fontSize: "18px" }}
+                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
                                         button onClick={() => {
-                                            handleClick(item)
+                                            handleClick()
                                         }}>
-                                        {'edit'}
-                                    </Icon>
+                                        <EditIcon style={{ fontSize: "18px" }} />
+                                    </IconButton>
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }}  >
-                                    <Icon
-                                        style={{ fontSize: "18px" }}
+                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
                                         button onClick={() => {
                                             handleRemoveItem()
                                         }}>
-                                        {'delete'}
-                                    </Icon>
+                                        <DeleteIcon style={{ fontSize: "18px" }} />
+                                    </IconButton>
+
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }} >
-                                    <Icon
-                                        style={{ fontSize: "18px" }}
+
+                                    <IconButton classes={{ root: classes.padding }} aria-label="delete"
                                         button onClick={() => {
-                                         addEntry(item)
+                                            addEntry(item)
                                         }}>
-                                        {'bookmark'}
-                                    </Icon>
+                                        <FileCopyIcon style={{ fontSize: "18px" }} />
+                                    </IconButton>
                                 </ListItemIcon>
                             </ListItem>
                             <Divider classes={{ root: classes.marginDivider }} />
