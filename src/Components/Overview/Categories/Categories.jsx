@@ -90,10 +90,10 @@ export default function Categories() {
 
                     {checked.map((item) => {
 
-                        const { id, icon, category, type, budget } = item
+                        const { id, icon, category, type, budget, currency } = item
 
                         const hasBudget = budget !== 0
-                        
+
                         return <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} button onClick={() => {
                             handleClick(item)
                         }}>
@@ -103,7 +103,7 @@ export default function Categories() {
                             <ListItemText primary={`${type} ${category}`} />
                             <ListItemText
                                 style={{ textAlign: 'right' }}
-                                primary={hasBudget ? budget : ''}
+                                primary={hasBudget ? (`${budget} ${currency}`) : ''}
                                 secondary={!hasBudget ? '' : type === 'income' ? 'planned' : 'budget'} />
                         </ListItem>
                     }

@@ -6,6 +6,7 @@ export const categotiesObj = [
         budget: 5000,
         icon: 'fastfood',
         isEnabled: true,
+        currency: "MKD"
     },
     {
         id: new Date().valueOf(),
@@ -14,7 +15,7 @@ export const categotiesObj = [
         budget: 6000,
         icon: 'fastfood',
         isEnabled: true,
-
+        currency: "MKD"
     },
     {
         id: new Date().valueOf(),
@@ -23,7 +24,7 @@ export const categotiesObj = [
         budget: 4500,
         icon: 'home',
         isEnabled: false,
-
+        currency: "MKD"
     },
     {
         id: new Date().valueOf(),
@@ -32,7 +33,7 @@ export const categotiesObj = [
         budget: 2000,
         icon: 'home',
         isEnabled: true,
-
+        currency: "MKD"
     },
     {
         id: new Date().valueOf(),
@@ -41,7 +42,7 @@ export const categotiesObj = [
         budget: 1500,
         icon: 'home',
         isEnabled: true,
-
+        currency: "MKD"
     },
     {
         id: new Date().valueOf(),
@@ -50,6 +51,7 @@ export const categotiesObj = [
         budget: 10000,
         icon: 'home',
         isEnabled: false,
+        currency: "MKD"
     },
 
 
@@ -60,5 +62,6 @@ export const categotiesObj = [
         budget: 5300,
         icon: 'home',
         isEnabled: false,
+        currency: "MKD"
     }
 ];

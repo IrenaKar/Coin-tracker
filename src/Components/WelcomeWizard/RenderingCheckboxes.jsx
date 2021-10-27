@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Context } from '../../Provider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import { Fragment } from 'react';
-import { Icon, ListItemText } from '@material-ui/core';
+import { Icon, Input, InputAdornment, InputBase, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -38,7 +38,7 @@ export default function RenderingCheckboxes() {
         setChecked(clone);
     };
 
-
+    const [budget, setBudget] = useState(checked)
 
     return (
         <div>
@@ -51,8 +51,18 @@ export default function RenderingCheckboxes() {
                             <ListItemIcon>
                                 <Icon>  {item.icon}</Icon>
                             </ListItemIcon>
-                            <ListItemText value={item.category} /> {item.category}
-                            <ListItemText onChange={(e) => updateChecked("budget", e, i)} value={item.budget} />{item.budget}
+                            <ListItemText value={item.category} primary={item.category} />
+                            <InputBase
+                                id="outlined-adornment-amount"
+                                value={budget.budget}
+                                onChange={(e) => updateChecked("budget", e, i)} value={budget.budget}
+                                endAdornment={<InputAdornment position="start"  value={item.currency}>{item.currency}</InputAdornment>}
+                                label="Budget"
+                                placeholder="enter budget"
+                            />
+
+
+
 
                         </ListItem>
 

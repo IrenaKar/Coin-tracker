@@ -98,6 +98,7 @@ const Provider = ({ children }) => {
     localStorage.setItem("entries", JSON.stringify(removed))
   }
 
+
   return (
 
     <Context.Provider

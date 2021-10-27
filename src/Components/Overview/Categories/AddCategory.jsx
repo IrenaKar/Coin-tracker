@@ -1,7 +1,8 @@
 import {
     Button, Checkbox, DialogActions,
     DialogContent, DialogTitle, FormControl,
-    FormControlLabel, InputLabel, makeStyles, MenuItem,
+    FormControlLabel, InputAdornment, InputLabel, makeStyles, MenuItem,
+    OutlinedInput,
     Select, TextField
 } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
@@ -24,6 +25,7 @@ export default function AddEditCategory({ handleClose, category }) {
         budget: 0,
         icon: categoryIcons[0],
         id: new Date().valueOf(),
+        currency: "MKD"
     })
 
     
@@ -92,9 +94,10 @@ export default function AddEditCategory({ handleClose, category }) {
                     </FormControl>
 
                     <FormControl className={classes.formControl} variant="outlined" fullWidth>
-                        <TextField
-                            label="Budget"
+                        <OutlinedInput
+                         
                             variant="outlined"
+                            endAdornment={<InputAdornment position="start" value={item.currency}>{item.currency}</InputAdornment>}
                             value={item.budget || 0}
                             onChange={(e) => {
                                 setItem({ ...item, budget: e.target.value })
