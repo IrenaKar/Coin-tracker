@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
         minWidth: "0%",
     },
     padding: {
-        padding: "0px",
+        paddingRight: "0px",
     }
 
 }));
-export default function ListEntries() {
+export default function ListEntries(index) {
 
     const classes = useStyles();
 
@@ -56,14 +56,14 @@ export default function ListEntries() {
             <List>
 
                 {entries.map((item) => {
-
                     const { id, type, amount, category, icon, date } = item
                     console.log(id)
                     return (
 
                         <>
                             <ListItem className={classes.text}
-                               
+                               id={id}
+                               key={id}
                                
                                 style={{ paddingBottom: "0" }}
                             >
@@ -82,7 +82,7 @@ export default function ListEntries() {
 
                             <ListItem style={{ paddingTop: "0" }}  >
                                 <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto" }}  >
-                                    <IconButton classes={{ root: classes.padding }} aria-label="edit entry"
+                                    <IconButton aria-label="edit entry"
                                         button onClick={() => {
                                             handleClick(item)
                                         }}>
@@ -90,10 +90,8 @@ export default function ListEntries() {
                                     </IconButton>
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }}  >
-                                    <IconButton classes={{ root: classes.padding }} aria-label="delete entry"
-                                        button onClick={() => {
-                                            handleRemoveItem()
-                                        }}>
+                                    <IconButton aria-label="delete entry"
+                                        button onClick={()=>handleRemoveItem(id)}>
                                         <DeleteIcon style={{ fontSize: "18px" }} />
                                     </IconButton>
 
@@ -102,7 +100,10 @@ export default function ListEntries() {
 
                                     <IconButton classes={{ root: classes.padding }} aria-label="copy entry"
                                         button onClick={() => {
-                                            addEntry(item)
+                                            addEntry({
+                                                ...item,
+                                                id: new Date().valueOf()
+                                            })
                                         }}>
                                         <FileCopyIcon style={{ fontSize: "18px" }} />
                                     </IconButton>

@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, FormControl, Icon, InputLabel, MenuItem, Select, TextField, Tooltip } from '@material-ui/core';
 import { Context } from '../../../Provider';
 import AddIcon from '@material-ui/icons/Add';
-
 import { TextareaAutosize } from '@material-ui/core';
 import { categoryIcons } from '../../Data/CategoryIcons';
 
@@ -69,7 +68,7 @@ export default function AddEntries() {
         category: '',
         amount: 0,
         icon: categoryIcons[0],
-        id: new Date().valueOf() || "",
+        id: new Date().valueOf(),
         date: new Date(),
         desc: ''
     })
@@ -84,8 +83,6 @@ export default function AddEntries() {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const [selectedDate, setSelectedDate] = useState(null);
 
     const { checked, addEntry, entries } = useContext(Context)
 
@@ -128,7 +125,10 @@ export default function AddEntries() {
                 >
                     <form onSubmit={(e) => {
                         e.preventDefault();
-                        addEntry(item)
+                        addEntry({
+                            ...item,
+                            id: new Date().valueOf()
+                            }) 
                         console.log(item)
                         handleClose()
                     }}>

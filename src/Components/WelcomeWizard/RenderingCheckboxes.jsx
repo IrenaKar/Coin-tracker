@@ -38,6 +38,8 @@ export default function RenderingCheckboxes() {
         setChecked(clone);
     };
 
+
+
     return (
         <div>
             {checked.map((item, i) => {
@@ -45,7 +47,6 @@ export default function RenderingCheckboxes() {
                 return (
                     <Fragment>
                         <ListItem classes={{ root: classes.align }} className={classes.text} id={item.id} key={i}
-
                         >
                             <ListItemIcon>
                                 <Icon>  {item.icon}</Icon>

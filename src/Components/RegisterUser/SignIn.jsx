@@ -92,8 +92,8 @@ export default function MultilineTextFields(props) {
         }
 
     }
-   
-    
+
+
     return (
         <React.Fragment>
             <Container maxWidth="sm">
@@ -105,7 +105,7 @@ export default function MultilineTextFields(props) {
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                         <InputLabel error={!values.email} htmlFor="outlined-basic">Username</InputLabel>
                         <OutlinedInput
-                         error={!values.email}
+                            error={!values.email}
                             required
                             id="outlined-basic"
                             label="Username"
@@ -118,7 +118,7 @@ export default function MultilineTextFields(props) {
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
                         <InputLabel htmlFor="outlined-adornment-password" error={!values.password}>Password</InputLabel>
                         <OutlinedInput
-                         error={!values.password}
+                            error={!values.password}
 
                             required
                             id="outlined-adornment-password"
@@ -151,7 +151,6 @@ export default function MultilineTextFields(props) {
                             className={classes.margin}
                             variant="contained"
                             color="primary"
-                            type="submit"
                         >
                             Sign in
                         </Button>

@@ -36,8 +36,7 @@ export default function ListExpences() {
         });
         
         item.amount += parseInt(o.amount);
-     
-      
+
         return r.set(key, item);
       }, new Map).values()];
       

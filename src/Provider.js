@@ -38,7 +38,6 @@ const Provider = ({ children }) => {
   const updateEntry = (entry) => {
     const updated = entries.map(c => {
       if (c.id === entry.id) {
-
         return entry
       } else {
         return c
@@ -56,7 +55,7 @@ const Provider = ({ children }) => {
 
     localStorage.setItem("entries", JSON.stringify(newEntry))
   }
- 
+
 
   useEffect(() => {
     const entry = localStorage.getItem("entries");
@@ -93,46 +92,41 @@ const Provider = ({ children }) => {
     }
   }, []);
 
-  const handleRemoveItem = idx => {
-    const temp = [...entries];
-
-    temp.splice(idx, 1);
-    console.log(temp)
-    setEntries(temp);
-    localStorage.setItem("category", JSON.stringify(temp))
-
+  const handleRemoveItem = (id) => {
+    const removed = entries.filter((i) => (i.id !== id))
+    setEntries(removed)
+    localStorage.setItem("entries", JSON.stringify(removed))
   }
 
-
   return (
-    
-      <Context.Provider
-        value={
-          {
-          
-            handleRemoveItem,
-            img,
-            setImg,
-            categories,
-            setCategories,
-            checked,
-            setChecked,
-            clickHandler,
-            addEntry,
-            entries,
-            updateCategory,
-            addCategory,
-            updateEntry,
-            setEntries,
-          }
+
+    <Context.Provider
+      value={
+        {
+
+          handleRemoveItem,
+          img,
+          setImg,
+          categories,
+          setCategories,
+          checked,
+          setChecked,
+          clickHandler,
+          addEntry,
+          entries,
+          updateCategory,
+          addCategory,
+          updateEntry,
+          setEntries,
         }
-      >
+      }
+    >
 
 
 
-        {children}
-      </Context.Provider>
-  
+      {children}
+    </Context.Provider>
+
   );
 };
 
