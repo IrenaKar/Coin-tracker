@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
-import { Icon, Typography } from '@material-ui/core';
+import { FormGroup, Icon, Typography } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import LogoText from '../Logo/LogoText';
 import { FormControl } from '@material-ui/core';
@@ -14,12 +14,10 @@ import Divider from '@material-ui/core/Divider';
 import { Fragment } from 'react';
 import { Context } from '../../Provider';
 import { useHistory } from 'react-router';
+
+
 const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            margin: theme.spacing(1),
-        },
-    },
+
     h1: {
         textTransform: "uppercase",
         fontSize: "30px",
@@ -32,23 +30,21 @@ const useStyles = makeStyles((theme) => ({
     },
 
     margin: {
-        marginTop: '100px'
+        marginTop: '50px'
     },
 
     button: {
         textTranform: "uppercase",
-        marginTop: "30px",
+        marginTop: "50px",
+        marginBottom: "80px",
+        backgroundColor: "#6200ee",
+
     },
-    flex: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignSelf: "flex-end",
-    },
+
     colorListItem: {
-        color: "black"
+        color: "black",
     },
  
-
 }));
 
 export default function WelcomePage() {
@@ -65,13 +61,13 @@ export default function WelcomePage() {
 
     useEffect(() => {
         if (checked.length > 0) {
-          setDisabled(false);
-      
+            setDisabled(false);
+
         } else {
-          setDisabled(true);
-       
+            setDisabled(true);
+
         }
-      }, [checked.length]);
+    }, [checked.length]);
 
     const history = useHistory();
 
@@ -96,7 +92,8 @@ export default function WelcomePage() {
                     {list.map((item, index) => {
                         return (
                             <Fragment>
-                                <ListItem button id={item.id} key={index}
+                                <ListItem
+                                    button id={item.id} key={index}
 
                                 >
                                     <ListItemIcon classes={{ root: classes.colorListItem }}>
@@ -104,20 +101,19 @@ export default function WelcomePage() {
                                             {item.icon}
                                         </Icon>
                                     </ListItemIcon>
-                                    <ListItemIcon>
+                                    <ListItem style={{ padding: "0", justifyContent: "flex-end"}}>
                                         <FormControlLabel
-                                        label={item.category}
-                                            classes={{ root: classes.colorListItem }}
+                                            labelPlacement="start"
+                                            className={classes.colorListItem}
+                                            label={item.category}
                                             control={
-                                                <Checkbox />
+                                                <Checkbox color="success" />
                                             }
                                             key={index}
                                             id={item.id}
                                             onClick={() => clickHandler(item)}
                                         />
-                                     
-                                    </ListItemIcon>
-
+                                    </ListItem>
                                 </ListItem>
                                 <Divider />
 
@@ -130,7 +126,7 @@ export default function WelcomePage() {
 
             </FormControl>
 
-            <Button disabled={!checked.length} onClick={handleRedirectBudget} fullWidth variant="contained" color="primary" className={classes.button}>
+            <Button disabled={!checked.length} onClick={handleRedirectBudget} fullWidth variant="contained" color="primary" classes={{root: classes.button}}>
                 done
             </Button>
         </Container>

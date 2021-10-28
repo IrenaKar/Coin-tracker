@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     padding: {
         paddingRight: "0px",
     },
+    colorBlack: {
+        color: "black"
+    }
 
 }));
 
@@ -81,10 +84,10 @@ export default function Categories() {
             <Header />
 
             <Box sx={{
-                 width: '60%',
-                 ['@media (max-width:780px)']: { 
-                   width: '100%'
-                 },
+                width: '60%',
+                ['@media (max-width:780px)']: {
+                    width: '100%'
+                },
                 marginLeft: "auto",
                 marginRight: "auto",
 
@@ -113,7 +116,7 @@ export default function Categories() {
                             return <>
                                 <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} >
                                     <ListItemIcon>
-                                        <Icon >{icon}</Icon>
+                                        <Icon className={type === "income" ? classes.incomeStyle : classes.expenseStyle}>{icon}</Icon>
                                     </ListItemIcon>
                                     <ListItemText primary={`${type} ${category}`} />
                                     <ListItemText

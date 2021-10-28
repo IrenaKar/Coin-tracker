@@ -15,13 +15,16 @@ const useStyles = makeStyles((theme) => ({
         textTransform: "capitalize",
         fontSize: "15px",
         fontFamily: "Roboto",
+
     },
     align: {
-        textAlign: "left"
+        textAlign: "left",
+    },
+    colorBlack: {
+        color: "black"
     }
 
 }))
-
 
 
 export default function RenderingCheckboxes() {
@@ -51,7 +54,7 @@ export default function RenderingCheckboxes() {
                         <ListItem classes={{ root: classes.align }} className={classes.text} id={item.id} key={i}
                         >
                             <ListItemIcon>
-                                <Icon>  {item.icon}</Icon>
+                                <Icon className={classes.colorBlack}>  {item.icon}</Icon>
                             </ListItemIcon>
                             <ListItemText value={item.category} primary={item.category} />
                             <InputBase
@@ -62,7 +65,6 @@ export default function RenderingCheckboxes() {
                                 label="Budget"
                                 placeholder="enter budget"
                             />
-
                         </ListItem>
 
                         <Divider />

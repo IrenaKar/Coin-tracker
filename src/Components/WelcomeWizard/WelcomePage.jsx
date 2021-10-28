@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
     button: {
         textTranform: "uppercase",
         marginTop: "150px",
+        backgroundColor: "#6200ee",
+
     },
     error: {
         color: "red",
@@ -86,7 +88,7 @@ export default function WelcomePage() {
                 />
             </FormControl>
             <div className={values.amount === '0' ? classes.error : ""}>{values.amount === "0" ? "The amount must be higher than zero" : ""}</div>
-            <Button disabled={values.amount === '0' || !values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" className={classes.button}>
+            <Button disabled={values.amount === '0' || !values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" classes={{root: classes.button}}>
                 add
             </Button>
 

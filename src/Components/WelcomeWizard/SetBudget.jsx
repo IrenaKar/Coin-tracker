@@ -36,6 +36,8 @@ const useStyles = makeStyles((theme) => ({
     button: {
         textTranform: "uppercase",
         marginTop: "100px",
+        backgroundColor: "#6200ee",
+
     },
     flex: {
         display: "flex",
@@ -64,7 +66,7 @@ export default function WelcomePage() {
                 </List>
             </FormControl>
             <Link to="/overview">
-                <Button fullWidth variant="contained" color="primary" className={classes.button}>
+                <Button fullWidth variant="contained" color="primary"  classes={{root: classes.button}}>
                     complete
                 </Button></Link>
         </Container>
