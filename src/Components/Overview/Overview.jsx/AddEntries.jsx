@@ -129,7 +129,7 @@ export default function AddEntries() {
                             ...item,
                             id: new Date().valueOf()
                             }) 
-                        console.log(item)
+                     
                         handleClose()
                     }}>
                         <DialogTitle className={classes.formControl}>Add Entry</DialogTitle>

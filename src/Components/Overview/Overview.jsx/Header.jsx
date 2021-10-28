@@ -5,10 +5,6 @@ import { Avatar } from '@material-ui/core';
 import { Context } from '../../../Provider';
 
 const useStyles = makeStyles((theme) => ({
-
-    width: {
-        width: "100%"
-    },
     avatarImg: {
         marginRight: "15px"
     },

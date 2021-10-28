@@ -34,49 +34,33 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Statistics() {
-  const { entries } = useContext(Context)
+  const { entries, sumEntries } = useContext(Context)
 
   const classes = useStyles();
 
-  const sumIncome = [...entries.reduce((r, o) => {
-    const key = o.category + o.type;
-    const item = r.get(key) || Object.assign({}, o, {
-      amount: 0,
-    });
-    item.amount += parseInt(o.amount);
-    return r.set(key, item);
-  }, new Map).values()];
-
-  const sumExpense = [...entries.reduce((r, o) => {
-    const key = o.category + o.type;
-    const item = r.get(key) || Object.assign({}, o, {
-      amount: 0,
-    });
-    item.amount += parseInt(o.amount);
-    return r.set(key, item);
-  }, new Map).values()];
-
-
   const valuesIncome = []
   const valuesExpense = []
-  sumIncome.map((x) => {
-    valuesIncome.push(x.amount)
-  })
-  sumExpense.map((x) => {
-    valuesExpense.push(x.amount)
+
+  sumEntries.map((x) => {
+    if (x.type === "income") {
+      valuesIncome.push(x.amount)
+    } else {
+      valuesExpense.push(x.amount)
+
+    }
   })
 
   const valueIncomeCategories = []
   const valueExpenseCategories = []
-  
-  sumExpense.map((x) => {
+
+  sumEntries.map((x) => {
     if (x.type === "income") {
       valueIncomeCategories.push(x.category)
     } else {
       valueExpenseCategories.push(x.category)
-
     }
   })
+
   const valueCategories = []
   const categoryDate = []
 
@@ -93,7 +77,6 @@ export default function Statistics() {
     ,
     datasets: [
       {
-        
         label: "Income",
         data: valuesIncome,
         fill: true,

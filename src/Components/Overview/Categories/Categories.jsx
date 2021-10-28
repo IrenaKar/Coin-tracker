@@ -1,4 +1,4 @@
-import { Box, Dialog, Paper, Typography } from '@material-ui/core';
+import { Box, Dialog, IconButton, Paper, Typography } from '@material-ui/core';
 import Icon from '@material-ui/core/Icon';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,6 +10,8 @@ import AddEditCategory from './AddCategory';
 import { Context } from '../../../Provider';
 import Header from '../Overview.jsx/Header';
 import Menu from '../Overview.jsx/Menu';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from "@material-ui/icons/Delete"
 
 
 
@@ -51,13 +53,19 @@ const useStyles = makeStyles((theme) => ({
     margin: {
         marginTop: "20px"
     },
+    width: {
+        minWidth: "0%",
+    },
+    padding: {
+        paddingRight: "0px",
+    },
 
 }));
 
 
 export default function Categories() {
     const classes = useStyles();
-    const { checked, img } = useContext(Context)
+    const { checked } = useContext(Context)
     const [open, setOpen] = useState(false)
     const [item, setItem] = useState(null)
 
@@ -94,18 +102,26 @@ export default function Categories() {
 
                         const hasBudget = budget !== 0
 
-                        return <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} button onClick={() => {
-                            handleClick(item)
-                        }}>
-                            <ListItemIcon>
-                                <Icon >{icon}</Icon>
-                            </ListItemIcon>
-                            <ListItemText primary={`${type} ${category}`} />
-                            <ListItemText
-                                style={{ textAlign: 'right' }}
-                                primary={hasBudget ? (`${budget} ${currency}`) : ''}
-                                secondary={!hasBudget ? '' : type === 'income' ? 'planned' : 'budget'} />
-                        </ListItem>
+                        return <>
+                            <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} >
+                                <ListItemIcon>
+                                    <Icon >{icon}</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary={`${type} ${category}`} />
+                                <ListItemText
+                                    style={{ textAlign: 'right' }}
+                                    primary={hasBudget ? (`${budget} ${currency}`) : ''}
+                                    secondary={!hasBudget ? '' : type === 'income' ? 'planned' : 'budget'} />
+                                <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto", paddingTop: "0" }} >
+                                    <IconButton style={{ paddingTop: "0" }} aria-label="edit category"
+                                        button onClick={() => {
+                                            handleClick(item)
+                                        }}>
+                                        <EditIcon style={{ fontSize: "18px" }} />
+                                    </IconButton>
+                                </ListItemIcon>
+                            </ListItem>
+                        </>
                     }
 
                     )}

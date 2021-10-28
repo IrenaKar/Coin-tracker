@@ -6,19 +6,14 @@ import WidgetsIcon from "@material-ui/icons/Widgets";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
 import AddEntries from "./AddEntries";
 
-
 const useStyles = makeStyles((theme) => ({
 
     links: {
         color: "white",
-        textDecoration: "none"
+        textDecoration: "none",
+        
     },
-    width: {
-        width: "100%"
-    },
-    avatarImg: {
-        marginRight: "15px"
-    },
+
 
 }));
 
@@ -33,12 +28,13 @@ const styleDiv2 = {
     position: "fixed",
     bottom: "0",
     color: "white",
+
     textAlign: "center",
     fontFamily: "Roboto",
     p: {
-        margin: '0px'
-    },
+        margin: '0px',
 
+    },
 
 };
 export default function Menu() {

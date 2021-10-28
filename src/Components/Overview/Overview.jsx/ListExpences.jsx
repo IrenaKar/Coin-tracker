@@ -24,40 +24,24 @@ const useStyles = makeStyles((theme) => ({
 export default function ListExpences() {
     const classes = useStyles();
 
-    const { entries, checked } = useContext(Context)
-
-    const sumExpense = [...entries.reduce((r, o) => {
-
-        const key = o.category  + o.type;
-        
-        const item = r.get(key) || Object.assign({}, o, {
-          amount: 0,
-          newBudget: checked.find(x => x.category === o.category).budget,
-        });
-        
-        item.amount += parseInt(o.amount);
-
-        return r.set(key, item);
-      }, new Map).values()];
-      
-      console.log(sumExpense);
+    const { sumEntries} = useContext(Context)
 
     return (
         <div>
 
-            {sumExpense.map((item) => {
+            {sumEntries.map((item) => {
 
                 if (item.type === "expence") {
 
                     return (
                         <>
-                            <ListItem key={item.id} style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }}
+                            <ListItem key={item.id} style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "" } : { color: "red" }}
                                 className={classes.text}>
                                 <ListItemIcon>
-                                    <Icon style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }} >{item.icon}</Icon>
+                                    <Icon style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "" } : { color: "red" }} >{item.icon}</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.type} ${item.category}`}/>  
-                                <ListItemText style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "black" } : { color: "red" }, {textAlign: 'right'}} className={classes.expenseStyle} primary={`${item.amount} ${!item.newBudget ? "" : "/"} ${!item.newBudget ? "" : item.newBudget}`}/>
+                                <ListItemText style={(item.newBudget === 0 || item.amount < item.newBudget) ? { color: "" } : { color: "red" }, {textAlign: 'right'}} className={classes.expenseStyle} primary={`${item.amount} ${!item.newBudget ? "" : "/"} ${!item.newBudget ? "" : item.newBudget}`}/>
                             </ListItem>
                             <div style={{ marginLeft: '50px', marginRight: '10px' }}>
                                 <ProgressBar value={item.amount} max={item.newBudget} />
