@@ -76,66 +76,79 @@ export default function Categories() {
     }
 
     return (
-        <Box>
+
+        <>
             <Header />
-            <Paper className={classes.margin} elevation={6}>
-                <Typography className={classes.header} variant="h6" component="h6">
-                    Categories
-                </Typography>
 
-                <List>
-                    <ListItem button onClick={() => {
-                        handleClick()
-                    }}>
-                        <ListItemIcon>
-                            <Icon>{'add'}</Icon>
-                        </ListItemIcon>
-                        <ListItemText primary={'Add new category'} />
-                    </ListItem>
+            <Box sx={{
+                 width: '60%',
+                 ['@media (max-width:780px)']: { 
+                   width: '100%'
+                 },
+                marginLeft: "auto",
+                marginRight: "auto",
 
-                    {checked.map((item) => {
+            }}>
+                <Paper className={classes.margin} elevation={6}>
+                    <Typography className={classes.header} variant="h6" component="h6">
+                        Categories
+                    </Typography>
 
-                        const { id, icon, category, type, budget, currency, } = item
+                    <List>
+                        <ListItem button onClick={() => {
+                            handleClick()
+                        }}>
+                            <ListItemIcon>
+                                <Icon>{'add'}</Icon>
+                            </ListItemIcon>
+                            <ListItemText primary={'Add new category'} />
+                        </ListItem>
 
-                        const hasBudget = budget !== 0
+                        {checked.map((item) => {
 
-                        return <>
-                            <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} >
-                                <ListItemIcon>
-                                    <Icon >{icon}</Icon>
-                                </ListItemIcon>
-                                <ListItemText primary={`${type} ${category}`} />
-                                <ListItemText
-                                    style={{ textAlign: 'right' }}
-                                    primary={hasBudget ? (`${budget} ${currency}`) : ''}
-                                    secondary={!hasBudget ? '' : type === 'income' ? 'planned' : 'budget'} />
-                                <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto", paddingTop: "0" }} >
-                                    <IconButton style={{ paddingTop: "0" }} aria-label="edit category"
-                                        button onClick={() => {
-                                            handleClick(item)
-                                        }}>
-                                        <EditIcon style={{ fontSize: "18px" }} />
-                                    </IconButton>
-                                </ListItemIcon>
-                            </ListItem>
-                        </>
-                    }
+                            const { id, icon, category, type, budget, currency, } = item
 
-                    )}
+                            const hasBudget = budget !== 0
 
-                </List>
-            </Paper>
+                            return <>
+                                <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} >
+                                    <ListItemIcon>
+                                        <Icon >{icon}</Icon>
+                                    </ListItemIcon>
+                                    <ListItemText primary={`${type} ${category}`} />
+                                    <ListItemText
+                                        style={{ textAlign: 'right' }}
+                                        primary={hasBudget ? (`${budget} ${currency}`) : ''}
+                                        secondary={!hasBudget ? '' : type === 'income' ? 'planned' : 'budget'} />
+                                    <ListItemIcon classes={{ root: classes.width }} style={{ marginLeft: "auto", paddingTop: "0" }} >
+                                        <IconButton style={{ paddingTop: "0" }} aria-label="edit category"
+                                            button onClick={() => {
+                                                handleClick(item)
+                                            }}>
+                                            <EditIcon style={{ fontSize: "18px" }} />
+                                        </IconButton>
+                                    </ListItemIcon>
+                                </ListItem>
+                            </>
+                        }
 
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <AddEditCategory handleClose={handleClose} category={item} />
-            </Dialog>
+                        )}
 
+                    </List>
+                </Paper>
+
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <AddEditCategory handleClose={handleClose} category={item} />
+                </Dialog>
+
+            </Box>
             <Menu />
-        </Box>
+
+        </>
     )
 }
 

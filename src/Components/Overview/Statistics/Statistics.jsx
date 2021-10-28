@@ -148,20 +148,31 @@ export default function Statistics() {
   };
 
   return (
-    <Box>
+    <>
       <Header />
-      <div>
-        <Bar data={dataIncome} options={optionsBarIncome} />
-      </div>
-      <div>
-        <Bar data={dataExpense} options={optionsBarExpense} />
-      </div>
 
-      <div style={{ paddingBottom: "80px", marginTop: "50px" }}>
-        <Line data={data} options={optionsLine} />
-      </div>
+      <Box sx={{
+        width: '60%',
+        ['@media (max-width:780px)']: { 
+          width: '100%'
+        },
+        marginLeft: "auto",
+        marginRight: "auto",
+
+      }}>
+        <div>
+          <Bar data={dataIncome} options={optionsBarIncome} />
+        </div>
+        <div>
+          <Bar data={dataExpense} options={optionsBarExpense} />
+        </div>
+
+        <div style={{ paddingBottom: "80px", marginTop: "50px" }}>
+          <Line data={data} options={optionsLine} />
+        </div>
+      </Box>
       <Menu />
-    </Box>
+    </>
   )
 }
 

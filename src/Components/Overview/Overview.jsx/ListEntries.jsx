@@ -57,7 +57,7 @@ export default function ListEntries(index) {
 
                 {entries.map((item) => {
                     const { id, type, amount, category, icon, date } = item
-                    console.log(id)
+
                     return (
 
                         <>

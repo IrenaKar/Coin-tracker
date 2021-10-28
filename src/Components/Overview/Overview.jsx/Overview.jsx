@@ -43,48 +43,59 @@ export default function Overview() {
     const classes = useStyles();
 
     return (
-
-        <Box >
+        <>
             <Header />
+            <Box sx={{
+                  width: '60%',
+                  ['@media (max-width:780px)']: { 
+                    width: '100%'
+                  },
+                marginLeft: "auto",
+                marginRight: "auto",
 
-            <div>
-
-                <Paper className={classes.margin} elevation={6}>
-                    <Typography className={classes.header}>
-                        Income
-                    </Typography>
-
-                    <List>
-                        <ListIncome />
-                    </List>
-
-                </Paper>
-                <Paper className={classes.margin}  elevation={6} >
-                    <Typography className={classes.header}>
-                        Expences
-                    </Typography>
-
-                    <List>
-                        <ListExpences />
-                    </List>
-
-                </Paper>
-                <Paper className={classes.margin}  elevation={6}>
-                    <Typography className={classes.header}>
-                        Entries
-                    </Typography>
+            }}>
 
 
-                    <List  className={classes.marginBottom} >
-                        <ListEntries />
+                <div>
 
-                    </List>
+                    <Paper className={classes.margin} elevation={6}>
+                        <Typography className={classes.header}>
+                            Income
+                        </Typography>
 
-                </Paper>
-            </div>
-<Menu/>
+                        <List>
+                            <ListIncome />
+                        </List>
 
-        </Box>
+                    </Paper>
+                    <Paper className={classes.margin} elevation={6} >
+                        <Typography className={classes.header}>
+                            Expences
+                        </Typography>
+
+                        <List>
+                            <ListExpences />
+                        </List>
+
+                    </Paper>
+                    <Paper className={classes.margin} elevation={6}>
+                        <Typography className={classes.header}>
+                            Entries
+                        </Typography>
+
+
+                        <List className={classes.marginBottom} >
+                            <ListEntries />
+
+                        </List>
+
+                    </Paper>
+                </div>
+
+            </Box>
+            <Menu />
+
+        </>
 
     );
 }
