@@ -34,7 +34,7 @@ export default function ListIncome() {
                 if (item.type === "income") {
                     return (
                         <>
-                            <ListItem key={item.id} className={classes.incomeStyle} className={classes.text}>
+                            <ListItem key={item.id} className={classes.incomeStyle, classes.text} >
                                 <ListItemIcon>
                                     <Icon>{item.icon}</Icon>
                                 </ListItemIcon>
@@ -46,7 +46,6 @@ export default function ListIncome() {
                             </div>
 
                         </>
-
 
                     )
 

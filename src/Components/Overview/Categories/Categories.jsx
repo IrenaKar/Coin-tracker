@@ -11,9 +11,6 @@ import { Context } from '../../../Provider';
 import Header from '../Overview.jsx/Header';
 import Menu from '../Overview.jsx/Menu';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from "@material-ui/icons/Delete"
-
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -98,7 +95,7 @@ export default function Categories() {
 
                     {checked.map((item) => {
 
-                        const { id, icon, category, type, budget, currency } = item
+                        const { id, icon, category, type, budget, currency, } = item
 
                         const hasBudget = budget !== 0
 

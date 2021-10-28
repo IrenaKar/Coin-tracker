@@ -2,50 +2,28 @@ import React, { useContext } from 'react'
 import { Box } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 import { Context } from '../../../Provider';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { Bar } from 'react-chartjs-2';
 import Header from '../Overview.jsx/Header';
 import Menu from '../Overview.jsx/Menu';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1),
-      width: theme.spacing(100),
-      height: theme.spacing(40),
-    }
-  },
-
-  links: {
-    color: "white",
-    textDecoration: "none"
-  },
-  margin: {
-    marginTop: "20px"
-  },
-
-}));
-
-
 
 export default function Statistics() {
   const { entries, sumEntries } = useContext(Context)
-
-  const classes = useStyles();
 
   const valuesIncome = []
   const valuesExpense = []
 
   sumEntries.map((x) => {
     if (x.type === "income") {
-      valuesIncome.push(x.amount)
+      return (
+
+        valuesIncome.push(x.amount)
+      )
     } else {
-      valuesExpense.push(x.amount)
+      return (
+        valuesExpense.push(x.amount)
+      )
 
     }
   })

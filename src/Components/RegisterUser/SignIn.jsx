@@ -14,22 +14,12 @@ import { FormControl } from "@material-ui/core";
 import clsx from 'clsx'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        margin: theme.spacing(1),
-        width: "100%",
-        marginTop: "40px",
-        marginBottom: "40px",
-
-    },
-
     h1: {
         textTransform: "uppercase",
         fontSize: "30px",
         fontFamily: "Roboto",
         letterSpacing: "10px",
         textAlign: "center"
-
-
     },
 
     formStyle: {
@@ -51,19 +41,15 @@ const useStyles = makeStyles((theme) => ({
     btnBg: {
         backgroundColor: "#6200ee",
         marginTop: "60px"
-    }
+    },
 
 }));
-
-
-
-
 
 export default function MultilineTextFields(props) {
 
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        email: "",
+        email: true,
         password: "",
         showPassword: false,
     });
@@ -82,17 +68,20 @@ export default function MultilineTextFields(props) {
 
     const formRef = React.useRef();
 
-    const handleRedirect = () => {
 
+function isValidEmailAddress(val) {
+    const regEmail = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/;
+    if (!regEmail.test(val)) {
+      return 'Invalid Email Address';
+    }
+  }
+    const handleRedirect = () => {
         if (formRef.current.reportValidity()) {
             history.push({
                 pathname: "./overview",
-
             })
         }
-
     }
-
 
     return (
         <React.Fragment>
@@ -101,10 +90,16 @@ export default function MultilineTextFields(props) {
                     <Logo />
                 </div>
                 <h1 className={classes.h1}>sign In</h1>
-                <form autoComplete="off" ref={formRef} >
+                <form
+                 autoComplete ref={formRef}
+                 >
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                         <InputLabel error={!values.email} htmlFor="outlined-basic">Username</InputLabel>
                         <OutlinedInput
+                        onChange={(event) => setValues({email: event.target.value})}
+                        onBlur={() => setValues({
+                            emailIsValid: isValidEmailAddress(values.email)
+                        })}
                             error={!values.email}
                             required
                             id="outlined-basic"
@@ -112,14 +107,14 @@ export default function MultilineTextFields(props) {
                             variant="outlined"
                             placeholder="Username"
                             type={'email'}
-
+                            name="email"
                         />
                     </FormControl>
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
                         <InputLabel htmlFor="outlined-adornment-password" error={!values.password}>Password</InputLabel>
                         <OutlinedInput
-                            error={!values.password}
 
+                            error={!values.password}
                             required
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
@@ -140,8 +135,6 @@ export default function MultilineTextFields(props) {
                             labelWidth={70}
                         />
                     </FormControl>
-
-
                     <div className={classes.formStyle}>
                         <Button
                             classes={{ root: classes.btnBg }}
@@ -154,12 +147,8 @@ export default function MultilineTextFields(props) {
                         >
                             Sign in
                         </Button>
-
-
                         <Typography>
-
-                            Don't have account yet?
-
+                            Don't have an account yet?
                         </Typography>
                         <Typography>
                             <Link to="/signup">
@@ -167,8 +156,6 @@ export default function MultilineTextFields(props) {
                             </Link>
                         </Typography>
                     </div>
-
-
                 </form>
             </Container>
         </React.Fragment>

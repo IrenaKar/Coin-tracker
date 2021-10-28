@@ -2,7 +2,6 @@ import {
     Button, Checkbox, DialogActions,
     DialogContent, DialogTitle, FormControl,
     FormControlLabel, InputAdornment, InputLabel, makeStyles, MenuItem,
-    OutlinedInput,
     Select, TextField
 } from '@material-ui/core'
 import React, { useContext, useState } from 'react'
@@ -94,8 +93,8 @@ export default function AddEditCategory({ handleClose, category }) {
                     </FormControl>
 
                     <FormControl className={classes.formControl} variant="outlined" fullWidth>
-                        <OutlinedInput
-                         
+                        <TextField
+                            label="Budget"
                             variant="outlined"
                             endAdornment={<InputAdornment position="start" value={item.currency}>{item.currency}</InputAdornment>}
                             value={item.budget || 0}

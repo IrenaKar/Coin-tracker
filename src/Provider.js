@@ -106,15 +106,12 @@ const Provider = ({ children }) => {
       amount: 0,
       newBudget: checked.find(x => x.category === o.category).budget,
     });
-    
+  
     item.amount += parseInt(o.amount);
-
     return r.set(key, item);
   }, new Map).values()];
   
-  console.log(sumEntries);
   return (
-
     <Context.Provider
       value={
         {

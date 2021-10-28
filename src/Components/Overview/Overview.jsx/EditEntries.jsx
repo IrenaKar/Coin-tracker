@@ -73,12 +73,9 @@ export default function EditEntries({ handleClose, entry }) {
     })
     const { checked, entries, updateEntry } = useContext(Context)
 
-
     const classes = useStyles();
 
-
     const icons = [...new Set(categoryIcons.concat(entries.map(c => c.icon)))]
-    const [selectedDate, setSelectedDate] = useState();
 
     return (
         <>

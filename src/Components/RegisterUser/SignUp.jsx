@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import IconButton from "@material-ui/core/IconButton";
@@ -6,7 +6,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Logo from "../Logo/LogoText";
-import { Button, Typography, OutlinedInput, TextField } from "@material-ui/core";
+import { Button, Typography, OutlinedInput } from "@material-ui/core";
 import { usePasswordValidation } from "./PasswordValidation";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
@@ -29,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Roboto",
         letterSpacing: "10px",
         textAlign: "center"
-
-
     },
 
     formStyle: {
@@ -58,17 +56,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#6200ee",
     }
     ,
-
-
-
 }));
 
-
-
-
-
 export default function MultilineTextFields(props) {
-
 
     const [password, setPassword] = useState({
         password: "",
@@ -87,18 +77,14 @@ export default function MultilineTextFields(props) {
     const setFirst = (prop) => (event) => {
         setPassword({ ...password, password: event.target.value });
         setValues({ ...values, [prop]: event.target.value });
-
-
     };
-
 
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        email: "",
+        email: true,
         password: "",
         showPassword: false,
     });
-
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -107,20 +93,24 @@ export default function MultilineTextFields(props) {
         event.preventDefault();
     };
 
-
     const history = useHistory();
 
     const formRef = React.useRef();
+
+    function isValidEmailAddress(val) {
+        const regEmail = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/;
+        if (!regEmail.test(val)) {
+            return 'Invalid Email Address';
+        }
+    }
 
     const handleRedirectWelcome = () => {
         if (formRef.current.reportValidity()) {
             history.push({
                 pathname: "./welcome",
-
             })
         }
     }
-
 
     return (
         <React.Fragment>
@@ -132,25 +122,30 @@ export default function MultilineTextFields(props) {
                 <form autoComplete="off" ref={formRef} className={classes.formStyle}>
 
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" required>
-                        <InputLabel htmlFor="outlined-adornment-email">Username</InputLabel>
+                        <InputLabel error={!values.email} htmlFor="outlined-adornment-email">Username</InputLabel>
                         <OutlinedInput
-error={values.email}
-                            id="outlined-adornment-email"
+                            onChange={(event) => setValues({ email: event.target.value })}
+                            onBlur={() => setValues({
+                                emailIsValid: isValidEmailAddress(values.email)
+                            })}
+                            error={!values.email}
+                            required
+                            id="outlined-basic"
                             label="Username"
                             variant="outlined"
                             placeholder="Username"
-                            type={"email"}
-                            required
+                            type={'email'}
+                            name="email"
                         />
                     </FormControl>
 
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
 
                         <InputLabel
-                            error={!validLength || !validLength2 || !specialChar || !values.password}
+                            error={!validLength || !validLength2 || !specialChar}
                             htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
-                        
+
                             required
                             autofocus
                             error={!validLength || !validLength2 || !specialChar}
@@ -173,7 +168,6 @@ error={values.email}
                             labelWidth={70}
                         />
 
-
                     </FormControl>
 
                     <br />
@@ -190,7 +184,6 @@ error={values.email}
                         </span> : <span>{""}</span>}
                     </div>
 
-
                     <div>
                         <Button
                             classes={{ root: classes.btnBg }}
@@ -204,11 +197,8 @@ error={values.email}
                             Sign up
                         </Button>
 
-
                         <Typography>
-
                             Already have an account?
-
                         </Typography>
                         <Typography>
                             <Link to="/">
@@ -216,8 +206,6 @@ error={values.email}
                             </Link>
                         </Typography>
                     </div>
-
-
                 </form>
             </Container>
         </React.Fragment>

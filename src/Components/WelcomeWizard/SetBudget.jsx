@@ -62,8 +62,6 @@ export default function WelcomePage() {
                 <List component="nav" aria-label="main mailbox folders">
                     <RenderingCheckboxes />
                 </List>
-
-
             </FormControl>
             <Link to="/overview">
                 <Button fullWidth variant="contained" color="primary" className={classes.button}>
