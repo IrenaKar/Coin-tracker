@@ -32,12 +32,12 @@ export default function RenderingCheckboxes() {
 
     const { checked, setChecked } = useContext(Context)
 
-    const updateChecked = (prop, event, i) => {
-        const old = checked[i];
+    const updateChecked = (prop, event, id) => {
+        const old = checked[id];
         const updated = { ...old, [prop]: event.target.value };
         const clone = [...checked];
 
-        clone[i] = updated;
+        clone[id] = updated;
         setChecked(clone);
         localStorage.setItem("category", JSON.stringify(clone))
 
@@ -47,21 +47,21 @@ export default function RenderingCheckboxes() {
 
     return (
         <div>
-            {checked.map((item, i) => {
+            {checked.map((item, id) => {
 
                 return (
                     <Fragment>
-                        <ListItem classes={{ root: classes.align }} className={classes.text} id={item.id} key={i}
+                        <ListItem classes={{ root: classes.align }} className={classes.text} id={item.id} key={id}
                         >
                             <ListItemIcon>
                                 <Icon className={classes.colorBlack}>  {item.icon}</Icon>
                             </ListItemIcon>
                             <ListItemText value={item.category} primary={item.category} />
                             <InputBase
-                            style={{width: "150px"}}
+                                style={{ width: "150px" }}
                                 id="outlined-adornment-amount"
                                 value={budget.budget}
-                                onChange={(e) => updateChecked("budget", e, i)}
+                                onChange={(e) => updateChecked("budget", e, id)}
                                 endAdornment={<InputAdornment position="start" value={item.currency}>{item.currency}</InputAdornment>}
                                 label="Budget"
                                 placeholder="enter budget"
