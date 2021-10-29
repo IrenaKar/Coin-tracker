@@ -49,7 +49,7 @@ export default function MultilineTextFields(props) {
 
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        email: true,
+        email: '',
         password: "",
         showPassword: false,
     });
@@ -68,13 +68,6 @@ export default function MultilineTextFields(props) {
 
     const formRef = React.useRef();
 
-
-function isValidEmailAddress(val) {
-    const regEmail = /^[ ]*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})[ ]*$/;
-    if (!regEmail.test(val)) {
-      return 'Invalid Email Address';
-    }
-  }
     const handleRedirect = () => {
         if (formRef.current.reportValidity()) {
             history.push({
@@ -91,16 +84,13 @@ function isValidEmailAddress(val) {
                 </div>
                 <h1 className={classes.h1}>sign In</h1>
                 <form
-                 autoComplete ref={formRef}
-                 >
+                    autoComplete ref={formRef}
+                >
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel error={!values.email} htmlFor="outlined-basic">Username</InputLabel>
+                        <InputLabel htmlFor="outlined-basic">Username</InputLabel>
                         <OutlinedInput
-                        onChange={(event) => setValues({email: event.target.value})}
-                        onFocus={() => setValues({
-                            emailIsValid: isValidEmailAddress(values.email)
-                        })}
-                            error={!values.email}
+                            onChange={(event) => setValues({ email: event.target.value })}
+
                             required
                             id="outlined-basic"
                             label="Username"
@@ -111,10 +101,8 @@ function isValidEmailAddress(val) {
                         />
                     </FormControl>
                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
-                        <InputLabel htmlFor="outlined-adornment-password" error={!values.password}>Password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
                         <OutlinedInput
-
-                            error={!values.password}
                             required
                             id="outlined-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
