@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Categories() {
     const classes = useStyles();
-    const { checked, values } = useContext(Context)
+    const { checked } = useContext(Context)
     const [open, setOpen] = useState(false)
     const [item, setItem] = useState(null)
 
@@ -101,9 +101,7 @@ export default function Categories() {
                 <Paper className={classes.margin} elevation={6}>
                     <Typography className={classes.header} variant="h6" component="h6">
                         Categories
-                        <div style={{ fontSize: "15px" }} className={classes.budget}>
-                            Current available Budget {" "} {`${values.amount}`} {" "} MKD
-                        </div>
+                      
                     </Typography>
 
                     <List>

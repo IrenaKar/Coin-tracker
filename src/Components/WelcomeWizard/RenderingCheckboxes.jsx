@@ -51,15 +51,15 @@ export default function RenderingCheckboxes() {
 
     const [budget, setBudget] = useState(checked)
 
-    // localStorage.setItem("amount", JSON.stringify(values.amount))
+    window.localStorage.setItem("amount", JSON.stringify(values.amount))
 
-    // useEffect(() => {
-    //     const amount = localStorage.getItem("amount");
-    //     const savedAmount = JSON.parse(amount);
-    //     if (savedAmount) {
-    //         setValues(savedAmount);
-    //     }
-    // }, []);
+    useEffect(() => {
+        const amount = localStorage.getItem("amount");
+        const savedAmount = JSON.parse(amount);
+        if (!savedAmount) {
+            setValues(savedAmount);
+        }
+    }, []);
 
     return (
         <div>
