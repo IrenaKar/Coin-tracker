@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const usePasswordValidation = ({ password = "", requiredLength = 8 }) => {
+export const usePasswordValidation = ({ password = "", requiredLength = 8, requiredLength2 =32 }) => {
     const [validLength, setValidLength] = useState(null);
 
     const [specialChar, setSpecialChar] = useState(null);
@@ -12,7 +12,7 @@ export const usePasswordValidation = ({ password = "", requiredLength = 8 }) => 
         setValidLength2(password.length <= 32 ? true : false);
         setSpecialChar(/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(password));
 
-    }, [password, requiredLength]);
+    }, [password, requiredLength, requiredLength2]);
 
 
     return [validLength, specialChar, validLength2];

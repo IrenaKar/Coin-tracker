@@ -34,7 +34,6 @@ export default function AddEditCategory({ handleClose, category }) {
  
     const isEditing = !!category?.id
 
-
     const allUniqueIcons = [...new Set(categoryIcons.concat(categories.map(c => c.icon)))]
 
 
