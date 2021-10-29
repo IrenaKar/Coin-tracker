@@ -97,7 +97,7 @@ function isValidEmailAddress(val) {
                         <InputLabel error={!values.email} htmlFor="outlined-basic">Username</InputLabel>
                         <OutlinedInput
                         onChange={(event) => setValues({email: event.target.value})}
-                        onBlur={() => setValues({
+                        onFocus={() => setValues({
                             emailIsValid: isValidEmailAddress(values.email)
                         })}
                             error={!values.email}

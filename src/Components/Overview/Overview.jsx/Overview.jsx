@@ -65,6 +65,7 @@ export default function Overview() {
 
                         <List>
                             <ListIncome />
+                            
                         </List>
 
                     </Paper>
@@ -86,7 +87,6 @@ export default function Overview() {
 
                         <List className={classes.marginBottom} >
                             <ListEntries />
-
                         </List>
 
                     </Paper>

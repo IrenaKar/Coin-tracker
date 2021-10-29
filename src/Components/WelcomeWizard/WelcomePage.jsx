@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
         color: "red",
     }
 
+
 }));
 
 export default function WelcomePage() {
@@ -75,9 +76,10 @@ export default function WelcomePage() {
                 How much money do you have at the moment?
             </Typography>
             <FormControl fullWidth className={classes.margin} variant="filled">
-                <InputLabel  error={values.amount === '0'}
+                <InputLabel error={values.amount === '0'}
                     htmlFor="filled-adornment-amount">Amount</InputLabel>
                 <FilledInput
+
                     error={values.amount === '0'}
                     fullWidth
                     type="number"
@@ -88,7 +90,7 @@ export default function WelcomePage() {
                 />
             </FormControl>
             <div className={values.amount === '0' ? classes.error : ""}>{values.amount === "0" ? "The amount must be higher than zero" : ""}</div>
-            <Button disabled={values.amount === '0' || !values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" classes={{root: classes.button}}>
+            <Button disabled={values.amount === '0' || !values.amount} onClick={handleRedirectZero} fullWidth variant="contained" color="primary" classes={{ root: classes.button }}>
                 add
             </Button>
 

@@ -125,7 +125,7 @@ export default function MultilineTextFields(props) {
                         <InputLabel error={!values.email} htmlFor="outlined-adornment-email">Username</InputLabel>
                         <OutlinedInput
                             onChange={(event) => setValues({ email: event.target.value })}
-                            onBlur={() => setValues({
+                            onFocus={() => setValues({
                                 emailIsValid: isValidEmailAddress(values.email)
                             })}
                             error={!values.email}

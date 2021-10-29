@@ -58,6 +58,7 @@ export default function RenderingCheckboxes() {
                             </ListItemIcon>
                             <ListItemText value={item.category} primary={item.category} />
                             <InputBase
+                            style={{width: "150px"}}
                                 id="outlined-adornment-amount"
                                 value={budget.budget}
                                 onChange={(e) => updateChecked("budget", e, i)}
