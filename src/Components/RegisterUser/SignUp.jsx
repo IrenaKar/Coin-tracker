@@ -162,8 +162,7 @@ export default function MultilineTextFields(props) {
                         {!validLength ? <span style={{ color: "red" }}>Password must contain at least 8 characters</span> : <span>{""}</span>}
                     </div>
                     <div className={classes.margin}>
-                        {!specialChar ? <span style={{ color: "red" }}>{`Password must contain at least one of this characters
-                        (!@#$%^&*)`} </span> : <span>{""}</span>}
+                        {!specialChar ? <span style={{ color: "red" }}>{`Password must contain at least one special character`} </span> : <span>{""}</span>}
 
                     </div>
                     <div className={classes.margin}>
