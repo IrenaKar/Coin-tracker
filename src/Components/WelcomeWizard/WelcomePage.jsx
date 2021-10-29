@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from '@material-ui/core';
 import { Container } from '@material-ui/core';
@@ -9,6 +9,7 @@ import { FormControl } from '@material-ui/core';
 import { InputAdornment } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import { Context } from '../../Provider';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,13 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function WelcomePage() {
     const classes = useStyles();
 
-    const [values, setValues] = React.useState({
-        amount: '',
-    });
-
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+    const { values, setValues } = useContext(Context)
 
     const history = useHistory();
 
@@ -85,7 +80,9 @@ export default function WelcomePage() {
                     type="number"
                     id="filled-adornment-amount"
                     value={values.amount}
-                    onChange={handleChange('amount')}
+                    onChange={(e) => {
+                        setValues({ ...values, amount: e.target.value })
+                    }}
                     startAdornment={<InputAdornment position="right"></InputAdornment>}
                 />
             </FormControl>

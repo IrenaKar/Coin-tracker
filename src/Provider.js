@@ -111,10 +111,22 @@ const Provider = ({ children }) => {
     return r.set(key, item);
   }, new Map).values()];
   
+
+  const [values, setValues] = React.useState({
+    amount: '',
+});
+
+
+// const handleChange = (prop) => (event) => {
+//     setValues({ ...values, [prop]: event.target.value });
+// };
+
   return (
     <Context.Provider
       value={
         {
+          values,
+          setValues,
           sumEntries,
           handleRemoveItem,
           img,

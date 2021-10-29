@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Context } from '../../Provider';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,6 +22,12 @@ const useStyles = makeStyles((theme) => ({
     },
     colorBlack: {
         color: "black"
+    },
+    budget: {
+        marginBottom: "40px",
+        textAlign: "left",
+        color: "red",
+        textDecoration: "underline",
     }
 
 }))
@@ -30,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RenderingCheckboxes() {
     const classes = useStyles();
 
-    const { checked, setChecked } = useContext(Context)
+    const { checked, setChecked, values, setValues } = useContext(Context)
 
     const updateChecked = (prop, event, id) => {
         const old = checked[id];
@@ -45,12 +51,27 @@ export default function RenderingCheckboxes() {
 
     const [budget, setBudget] = useState(checked)
 
+    // localStorage.setItem("amount", JSON.stringify(values.amount))
+
+    // useEffect(() => {
+    //     const amount = localStorage.getItem("amount");
+    //     const savedAmount = JSON.parse(amount);
+    //     if (savedAmount) {
+    //         setValues(savedAmount);
+    //     }
+    // }, []);
+
     return (
         <div>
+            <div className={classes.text, classes.budget}>
+                Current available Budget{" "} {`${values.amount}`} {" "}MKD
+            </div>
+
             {checked.map((item, id) => {
 
                 return (
                     <Fragment>
+
                         <ListItem classes={{ root: classes.align }} className={classes.text} id={item.id} key={id}
                         >
                             <ListItemIcon>

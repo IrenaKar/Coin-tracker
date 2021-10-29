@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     margin: {
-        marginTop: '100px'
+        marginTop: '50px'
     },
 
     button: {
