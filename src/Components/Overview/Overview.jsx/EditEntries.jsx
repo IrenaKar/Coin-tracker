@@ -95,14 +95,14 @@ export default function EditEntries({ handleClose, entry }) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="type"
-                            value={item.type || ''}
+                            value={item.type}
                             label="type-label"
                             onChange={(e) => {
                                 setItem({ ...item, type: e.target.value })
                             }}
                         >
-                            <MenuItem value={"income"}>Income</MenuItem>
-                            <MenuItem value={"expence"}>Expence</MenuItem>
+                            <MenuItem value={"income"}>{"income"}</MenuItem>
+                            <MenuItem value={"expense"}>{"expense"}</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl variant="outlined" fullWidth className={classes.formControl}>
@@ -121,8 +121,9 @@ export default function EditEntries({ handleClose, entry }) {
 
                             {checked.map((element) => {
                                 return (
-                                    <MenuItem value={element.category}>{element.category}</MenuItem>
-                                )
+                                    <MenuItem key={element.category} value={element.category}>
+                                        {element.category}
+                                    </MenuItem>)                               
                             })}
                         </Select>
                     </FormControl>

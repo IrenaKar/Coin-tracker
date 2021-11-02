@@ -5,7 +5,7 @@ import Provider from "./Provider";
 
 import SignIn from './Components/RegisterUser/SignIn'
 import SignUp from './Components/RegisterUser/SignUp'
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Overview from "./Components/Overview/Overview.jsx/Overview";
 import WelcomePage from "./Components/WelcomeWizard/WelcomePage";
 import ChooseCategory from "./Components/WelcomeWizard/ChooseCategory";

@@ -5,7 +5,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'fastfood',
-        isEnabled: true,
+        isEnabled: false,
         currency: "MKD"
     },
     {
@@ -14,7 +14,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'fastfood',
-        isEnabled: true,
+        isEnabled: false,
         currency: "MKD"
     },
     {
@@ -32,7 +32,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: true,
+        isEnabled: false,
         currency: "MKD"
     },
     {
@@ -41,7 +41,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: true,
+        isEnabled: false,
         currency: "MKD"
     },
     {
@@ -63,5 +63,34 @@ export const categotiesObj = [
         icon: 'home',
         isEnabled: false,
         currency: "MKD"
-    }
+    },
+
+    {
+        id: new Date().valueOf(),
+        category: "Salary",
+        type: 'income',
+        budget: 0,
+        icon: 'home',
+        isEnabled: false,
+        currency: "MKD"
+    },
+    {
+        id: new Date().valueOf(),
+        category: "Bonus",
+        type: 'income',
+        budget: 0,
+        icon: 'home',
+        isEnabled: false,
+        currency: "MKD"
+    },
+    {
+        id: new Date().valueOf(),
+        category: "Sells",
+        type: 'income',
+        budget: 0,
+        icon: 'home',
+        isEnabled: false,
+        currency: "MKD"
+    },
+
 ];

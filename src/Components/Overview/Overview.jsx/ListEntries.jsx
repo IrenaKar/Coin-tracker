@@ -87,7 +87,7 @@ export default function ListEntries(index) {
                                 </ListItemIcon>
                                 <ListItemIcon classes={{ root: classes.width }}  >
                                     <IconButton style={{ paddingTop: "0" }} aria-label="delete entry"
-                                        button onClick={() => handleRemoveItem(id)}>
+                                        button onClick={(e) => { if (window.confirm('Are you sure you wish to delete this entry?')) handleRemoveItem(id) }}>
                                         <DeleteIcon style={{ fontSize: "18px" }} />
                                     </IconButton>
 

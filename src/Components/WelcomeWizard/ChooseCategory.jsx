@@ -41,10 +41,15 @@ const useStyles = makeStyles((theme) => ({
 
     },
 
-    colorListItem: {
-        color: "black",
+    // colorListItem: {
+    //     color: "black",
+    // },
+    expenseStyle: {
+        color: "red"
     },
- 
+    incomeStyle: {
+        color: "#03dac5"
+    },
 }));
 
 export default function WelcomePage() {
@@ -85,7 +90,7 @@ export default function WelcomePage() {
                 welcome
             </h2>
             <Typography>
-                Choose what you spend money on
+                Choose what your income or expense category
             </Typography>
             <FormControl fullWidth className={classes.margin} variant="filled">
                 <List component="nav" aria-label="main mailbox folders">
@@ -96,7 +101,7 @@ export default function WelcomePage() {
                                     button id={item.id} key={index}
 
                                 >
-                                    <ListItemIcon classes={{ root: classes.colorListItem }}>
+                                    <ListItemIcon classes={item.type === "income" ? {root: classes.incomeStyle} : {root: classes.expenseStyle} }>
                                         <Icon>
                                             {item.icon}
                                         </Icon>

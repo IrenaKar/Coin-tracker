@@ -92,6 +92,8 @@ const Provider = ({ children }) => {
     }
   }, []);
 
+ 
+
   const handleRemoveItem = (id) => {
     const removed = entries.filter((i) => (i.id !== id))
     setEntries(removed)
@@ -100,31 +102,34 @@ const Provider = ({ children }) => {
 
   const sumEntries = [...entries.reduce((r, o) => {
 
-    const key = o.category  + o.type;
-    
+    const key = o.category + o.type;
+
     const item = r.get(key) || Object.assign({}, o, {
       amount: 0,
       newBudget: checked.find(x => x.category === o.category).budget,
     });
-  
+
     item.amount += parseInt(o.amount);
     return r.set(key, item);
   }, new Map).values()];
-  
+
 
   const [values, setValues] = React.useState({
     amount: '',
-});
+  });
 
 
-// const handleChange = (prop) => (event) => {
-//     setValues({ ...values, [prop]: event.target.value });
-// };
+
+
+  // const handleChange = (prop) => (event) => {
+  //     setValues({ ...values, [prop]: event.target.value });
+  // };
 
   return (
     <Context.Provider
       value={
         {
+
           values,
           setValues,
           sumEntries,

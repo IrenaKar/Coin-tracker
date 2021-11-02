@@ -37,7 +37,7 @@ export default function AddEditCategory({ handleClose, category }) {
     const allUniqueIcons = [...new Set(categoryIcons.concat(categories.map(c => c.icon)))]
 
 
-    return (
+return (
         <>
             <DialogTitle>{`${isEditing ? 'Edit' : 'Add'} Category`}</DialogTitle>
             <form onSubmit={(e) => {
