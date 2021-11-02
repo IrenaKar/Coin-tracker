@@ -114,14 +114,14 @@ export default function AddEntries() {
                         add expense
                     </Button>
                 )}
-                  {show && (
+                {show && (
                     <Button
                         className={classes.btnSmall} value={"income"} color="secondary" variant="contained" size="small" type="button" onClick={handleOpen}
                     >
                         add income
                     </Button>
                 )}
-           
+
 
             </div>
             <div>
@@ -149,15 +149,15 @@ export default function AddEntries() {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="type"
-                                    value={item.type}
+                                    value={item.type || ""}
                                     label="type-label"
                                     onChange={(e) => {
                                         setItem({ ...item, type: e.target.value })
                                     }}
                                 >
-                                    <MenuItem value={'income'}>{"income"}</MenuItem>
-                                    <MenuItem value={'expense'}>{"expense"}</MenuItem>
-                                  
+                                    <MenuItem value='income'>Income</MenuItem>
+                                    <MenuItem value='expense'>Expense</MenuItem>
+
                                 </Select>
                             </FormControl>
                             <FormControl variant="outlined" fullWidth className={classes.formControl}>
@@ -185,13 +185,7 @@ export default function AddEntries() {
                                                 </MenuItem>
                                             )
                                         }))}
-                                    {/* {checked.map((element) => {
-                                        
-                                        return (
-                                            <MenuItem key={element.category} value={element.category}>
-                                                {element.category}
-                                            </MenuItem>)
-                                    })} */}
+                             
                                 </Select>
                             </FormControl>
                             <FormControl className={classes.formControl} variant="outlined" fullWidth>

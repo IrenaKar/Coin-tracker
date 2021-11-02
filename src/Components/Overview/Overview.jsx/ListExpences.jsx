@@ -25,7 +25,7 @@ export default function ListExpences() {
 
             {sumEntries.map((item) => {
 
-                if (item.type === "expence") {
+                if (item.type === "expense") {
 
                     return (
                         <>
