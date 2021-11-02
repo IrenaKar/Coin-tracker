@@ -5,7 +5,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'fastfood',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -14,7 +14,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'fastfood',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -23,7 +23,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -32,7 +32,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -41,7 +41,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -50,7 +50,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
 
@@ -61,7 +61,7 @@ export const categotiesObj = [
         type: 'expense',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
 
@@ -71,7 +71,7 @@ export const categotiesObj = [
         type: 'income',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -80,7 +80,7 @@ export const categotiesObj = [
         type: 'income',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
     {
@@ -89,7 +89,7 @@ export const categotiesObj = [
         type: 'income',
         budget: 0,
         icon: 'home',
-        isEnabled: false,
+        isEnabled: true,
         currency: "MKD"
     },
 

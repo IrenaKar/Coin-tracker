@@ -42,14 +42,11 @@ export default function RenderingCheckboxes() {
         const old = checked[id];
         const updated = { ...old, [prop]: event.target.value };
         const clone = [...checked];
-
         clone[id] = updated;
         setChecked(clone);
         localStorage.setItem("category", JSON.stringify(clone))
 
     };
-
-    const [budget, setBudget] = useState(checked)
 
     window.localStorage.setItem("amount", JSON.stringify(values.amount))
 
@@ -81,7 +78,7 @@ export default function RenderingCheckboxes() {
                             <InputBase
                                 style={{ width: "150px" }}
                                 id="outlined-adornment-amount"
-                                value={budget.budget}
+                                value={item.budget}
                                 onChange={(e) => updateChecked("budget", e, id)}
                                 endAdornment={<InputAdornment position="start" value={item.currency}>{item.currency}</InputAdornment>}
                                 label="Budget"

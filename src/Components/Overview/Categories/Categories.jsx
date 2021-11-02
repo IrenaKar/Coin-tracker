@@ -57,7 +57,8 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: "0px",
     },
     colorBlack: {
-        color: "black"
+        color: "black",
+        backgroundColor: "lightgray"
     },
 
     budget: {
@@ -116,14 +117,14 @@ export default function Categories() {
 
                         {checked.map((item) => {
 
-                            const { id, icon, category, type, budget, currency, } = item
+                            const { id, icon, category, type, budget, currency, isEnabled} = item
 
                             const hasBudget = budget !== 0
 
                             return <>
-                                <ListItem className={type === "income" ? classes.incomeStyle : classes.expenseStyle} key={id} id={id} >
+                                <ListItem className={!isEnabled ? classes.colorBlack : (type === "income" ? classes.incomeStyle : classes.expenseStyle)} key={id} id={id} >
                                     <ListItemIcon>
-                                        <Icon className={type === "income" ? classes.incomeStyle : classes.expenseStyle}>{icon}</Icon>
+                                        <Icon className={!isEnabled ? classes.colorBlack : (type === "income" ? classes.incomeStyle : classes.expenseStyle)}>{icon}</Icon>
                                     </ListItemIcon>
                                     <ListItemText primary={`${type} ${category}`} />
                                     <ListItemText

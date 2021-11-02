@@ -173,19 +173,20 @@ export default function AddEntries() {
                                         setItem({ ...item, category: e.target.value })
                                     }}
                                 >
-                                    {item.type === "income" ? (checked.filter(filter => filter.type === "income").map((filteredType) => {
-                                            return (
-                                                <MenuItem key={filteredType.category} value={filteredType.category}>
-                                                    {filteredType.category}
-                                                </MenuItem>
-                                            )})) : (checked.filter(filter => filter.type === "expense").map((filteredType) => {
-                                            return (
-                                                <MenuItem key={filteredType.category} value={filteredType.category}>
-                                                    {filteredType.category}
-                                                </MenuItem>
-                                            )
-                                        }))}
-                             
+                                    {item.type === "income" ? (checked.filter(filter => filter.type === "income" && filter.isEnabled === true).map((filteredType) => {
+                                        return (
+                                            <MenuItem key={filteredType.category} value={filteredType.category}>
+                                                {filteredType.category}
+                                            </MenuItem>
+                                        )
+                                    })) : (checked.filter(filter => filter.type === "expense" && filter.isEnabled === true).map((filteredType) => {
+                                        return (
+                                            <MenuItem key={filteredType.category} value={filteredType.category}>
+                                                {filteredType.category}
+                                            </MenuItem>
+                                        )
+                                    }))}
+
                                 </Select>
                             </FormControl>
                             <FormControl className={classes.formControl} variant="outlined" fullWidth>

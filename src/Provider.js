@@ -92,7 +92,7 @@ const Provider = ({ children }) => {
     }
   }, []);
 
- 
+
 
   const handleRemoveItem = (id) => {
     const removed = entries.filter((i) => (i.id !== id))
@@ -118,12 +118,6 @@ const Provider = ({ children }) => {
     amount: '',
   });
 
-
-
-
-  // const handleChange = (prop) => (event) => {
-  //     setValues({ ...values, [prop]: event.target.value });
-  // };
 
   return (
     <Context.Provider

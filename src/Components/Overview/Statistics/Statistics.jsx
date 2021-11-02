@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Box } from '@material-ui/core';
 import { Line } from 'react-chartjs-2';
 import { Context } from '../../../Provider';
-
 import { Bar } from 'react-chartjs-2';
 import Header from '../Overview.jsx/Header';
 import Menu from '../Overview.jsx/Menu';
@@ -17,7 +16,6 @@ export default function Statistics() {
   sumEntries.map((x) => {
     if (x.type === "income") {
       return (
-
         valuesIncome.push(x.amount)
       )
     } else {
@@ -39,13 +37,21 @@ export default function Statistics() {
     }
   })
 
+
   const valueCategories = []
   const categoryDate = []
+  const incomeAmount = []
+  const expenseAmount = []
+
 
   entries.map((x) => {
     valueCategories.push(x.category)
     categoryDate.push(x.date)
-
+    if (x.type === 'income') {
+      incomeAmount.push(x.amount)
+    } else {
+      expenseAmount.push(x.amount)
+    }
   })
 
 
@@ -56,14 +62,14 @@ export default function Statistics() {
     datasets: [
       {
         label: "Income",
-        data: valuesIncome,
+        data: incomeAmount,
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "#03dac5"
       },
       {
         label: "Expense",
-        data: valuesExpense,
+        data: expenseAmount,
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "red"
@@ -104,7 +110,7 @@ export default function Statistics() {
     scales: {
       y: {
         beginAtZero: true
-      }
+      },
     }
   };
 
@@ -153,7 +159,7 @@ export default function Statistics() {
 
       <Box sx={{
         width: '60%',
-        ['@media (max-width:780px)']: { 
+        ['@media (max-width:780px)']: {
           width: '100%'
         },
         marginLeft: "auto",

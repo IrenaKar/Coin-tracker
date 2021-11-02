@@ -119,12 +119,19 @@ export default function EditEntries({ handleClose, entry }) {
                             }}
                         >
 
-                            {checked.map((element) => {
+                            {item.type === "income" ? (checked.filter(filter => filter.type === "income").map((filteredType) => {
                                 return (
-                                    <MenuItem key={element.category} value={element.category}>
-                                        {element.category}
-                                    </MenuItem>)                               
-                            })}
+                                    <MenuItem key={filteredType.category} value={filteredType.category}>
+                                        {filteredType.category}
+                                    </MenuItem>
+                                )
+                            })) : (checked.filter(filter => filter.type === "expense").map((filteredType) => {
+                                return (
+                                    <MenuItem key={filteredType.category} value={filteredType.category}>
+                                        {filteredType.category}
+                                    </MenuItem>
+                                )
+                            }))}
                         </Select>
                     </FormControl>
                     <FormControl className={classes.formControl} variant="outlined" fullWidth>

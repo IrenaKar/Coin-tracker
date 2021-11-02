@@ -116,7 +116,10 @@ export default function WelcomePage() {
                                             }
                                             key={index}
                                             id={item.id}
-                                            onClick={() => clickHandler(item)}
+                                            onClick={() => clickHandler({
+                                                ...item,
+                                                id: new Date().valueOf()
+                                            })}
                                         />
                                     </ListItem>
                                 </ListItem>
