@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
     button: {
         textTranform: "uppercase",
-        marginTop: "100px",
+        marginTop: "50px",
+        marginBottom: "80px",
         backgroundColor: "#6200ee",
 
     },
@@ -58,7 +59,7 @@ export default function WelcomePage() {
                 welcome
             </h2>
             <Typography>
-                Set how much money you want to spend on each category monthly
+                Set how much money you spend or make from each category monthly
             </Typography>
             <FormControl fullWidth className={classes.margin} variant="filled">
                 <List component="nav" aria-label="main mailbox folders">
@@ -66,7 +67,7 @@ export default function WelcomePage() {
                 </List>
             </FormControl>
             <Link to="/overview">
-                <Button fullWidth variant="contained" color="primary"  classes={{root: classes.button}}>
+                <Button fullWidth variant="contained" color="primary" classes={{ root: classes.button }}>
                     complete
                 </Button></Link>
         </Container>

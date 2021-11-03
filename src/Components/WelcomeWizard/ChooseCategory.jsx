@@ -41,9 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
     },
 
-    // colorListItem: {
-    //     color: "black",
-    // },
     expenseStyle: {
         color: "red"
     },
@@ -79,7 +76,6 @@ export default function WelcomePage() {
     const handleRedirectBudget = () => {
         history.push({
             pathname: "./budget",
-
         })
     }
 
@@ -101,12 +97,12 @@ export default function WelcomePage() {
                                     button id={item.id} key={index}
 
                                 >
-                                    <ListItemIcon classes={item.type === "income" ? {root: classes.incomeStyle} : {root: classes.expenseStyle} }>
+                                    <ListItemIcon classes={item.type === "income" ? { root: classes.incomeStyle } : { root: classes.expenseStyle }}>
                                         <Icon>
                                             {item.icon}
                                         </Icon>
                                     </ListItemIcon>
-                                    <ListItem style={{ padding: "0", justifyContent: "flex-end"}}>
+                                    <ListItem style={{ padding: "0", justifyContent: "flex-end" }}>
                                         <FormControlLabel
                                             labelPlacement="start"
                                             className={classes.colorListItem}
@@ -134,7 +130,7 @@ export default function WelcomePage() {
 
             </FormControl>
 
-            <Button disabled={!checked.length} onClick={handleRedirectBudget} fullWidth variant="contained" color="primary" classes={{root: classes.button}}>
+            <Button disabled={!checked.length} onClick={handleRedirectBudget} fullWidth variant="contained" color="primary" classes={{ root: classes.button }}>
                 done
             </Button>
         </Container>

@@ -6,12 +6,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Logo from "../Logo/LogoText";
-import { Button, OutlinedInput, Typography } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { InputLabel } from "@material-ui/core";
 import { FormControl } from "@material-ui/core";
 import clsx from 'clsx'
+import { useFormik } from 'formik'
+import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
     h1: {
@@ -33,14 +34,15 @@ const useStyles = makeStyles((theme) => ({
     },
 
     margin: {
-        marginBottom: "50px"
+        marginBottom: "10px",
+        marginTop: "30px"
     },
+
     textField: {
         width: '100%',
     },
     btnBg: {
         backgroundColor: "#6200ee",
-        marginTop: "60px"
     },
 
 }));
@@ -53,9 +55,7 @@ export default function MultilineTextFields(props) {
         password: "",
         showPassword: false,
     });
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
+
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -66,15 +66,35 @@ export default function MultilineTextFields(props) {
 
     const history = useHistory();
 
-    const formRef = React.useRef();
 
-    const handleRedirect = () => {
-        if (formRef.current.reportValidity()) {
+
+    const validationSchema = yup.object({
+        email: yup
+            .string('Enter your email')
+            .email('Enter a valid email')
+            .required('Email is required'),
+        password: yup
+            .string('Enter your password')
+            .required('Password is required')
+
+    });
+
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+            showPassword: false,
+
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+            alert(JSON.stringify(values, null, 2));
             history.push({
                 pathname: "./overview",
             })
-        }
-    }
+        },
+    });
 
     return (
         <React.Fragment>
@@ -83,68 +103,61 @@ export default function MultilineTextFields(props) {
                     <Logo />
                 </div>
                 <h1 className={classes.h1}>sign In</h1>
-                <form
-                    autoComplete ref={formRef}
-                >
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                        <InputLabel htmlFor="outlined-basic">Username</InputLabel>
-                        <OutlinedInput
-                            onChange={(event) => setValues({ email: event.target.value })}
+                <div className={classes.formStyle}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" required>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                id="outlined-adornment-email"
+                                name="email"
+                                label="Username"
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
+                                error={formik.touched.email && Boolean(formik.errors.email)}
+                                helperText={formik.touched.email && formik.errors.email}
+                            />
+                        </FormControl>
+                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                id="outlined-adornment-password"
+                                name="password"
+                                label="Password"
+                                type={values.showPassword ? 'text' : 'password'}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                error={formik.touched.password && Boolean(formik.errors.password)}
+                                helperText={formik.touched.password && formik.errors.password}
+                                InputProps={{
+                                    endAdornment:
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton></InputAdornment>
+                                }}
 
-                            required
-                            id="outlined-basic"
-                            label="Username"
-                            variant="outlined"
-                            placeholder="Username"
-                            type={'email'}
-                            name="email"
-                        />
-                    </FormControl>
-                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" >
-                        <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
-                        <OutlinedInput
-                            required
-                            id="outlined-adornment-password"
-                            type={values.showPassword ? 'text' : 'password'}
-                            value={values.password}
-                            onChange={handleChange('password')}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            labelWidth={70}
-                        />
-                    </FormControl>
-                    <div className={classes.formStyle}>
-                        <Button
-                            classes={{ root: classes.btnBg }}
-                            type={'submit'}
-                            autoFocus
-                            onClick={handleRedirect}
-                            className={classes.margin}
-                            variant="contained"
-                            color="primary"
-                        >
+                            />
+                        </FormControl>
+                        <Button className={classes.margin} classes={{ root: classes.btnBg }} color="primary" variant="contained" type="submit">
                             Sign in
                         </Button>
                         <Typography>
-                            Don't have an account yet?
+                            Don't have account yet?
                         </Typography>
                         <Typography>
                             <Link to="/signup">
-                                Sign up now, it is free!
+                                Sign up now, it's free!
                             </Link>
                         </Typography>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </Container>
         </React.Fragment>
     );

@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
         textTranform: "uppercase",
         marginTop: "150px",
         backgroundColor: "#6200ee",
-
     },
     error: {
         color: "red",

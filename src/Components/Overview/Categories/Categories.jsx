@@ -15,7 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
+        maxWidth: 100,
         backgroundColor: theme.palette.background.paper,
         display: "flex",
         flexWrap: "wrap",
@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
     },
 
     margin: {
-        marginTop: "20px"
+        marginTop: "20px",
+        marginBottom: "100px",
+
     },
     width: {
         minWidth: "0%",
